@@ -1,0 +1,59 @@
+{
+    "@context": {
+        "@version": 1.1,
+        "@protected": true,
+
+        "AnchorCredential": {
+            "@id": "https://trustbloc.dev/ns/activityanchors#AnchorCredential",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type"
+            }
+        },
+        "Anchor": {
+            "@id": "https://trustbloc.dev/ns/activityanchors#Anchor",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type",
+
+                "activityanchors": "https://trustbloc.dev/ns/activityanchors#",
+        
+                "coreIndex": "activityanchors:coreIndex",
+                "operationCount": "activityanchors:operationCount",
+                "namespace": "activityanchors:namespace",
+                "previousAnchors": "activityanchors:previousAnchors",
+                "version": "activityanchors:version"
+            }
+        },
+        "AnchorCredentialReference": {
+            "@id": "https://trustbloc.dev/ns/activityanchors#AnchorCredentialReference",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type"
+            }
+        },
+        "ContentAddressedStorage": {
+            "@id": "https://trustbloc.dev/ns/activityanchors#ContentAddressedStorage",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type",
+
+                "activityanchors": "https://trustbloc.dev/ns/activityanchors#",
+        
+                "cid": "activityanchors:contentIdentifier"
+            }
+        }
+    }
+}
