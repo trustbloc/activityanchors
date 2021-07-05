@@ -4,7 +4,7 @@
         "@protected": true,
 
         "AnchorCredential": {
-            "@id": "https://trustbloc.dev/ns/activityanchors#AnchorCredential",
+            "@id": "https://w3id.org/activityanchors#AnchorCredential",
             "@context": {
                 "@version": 1.1,
                 "@protected": true,
@@ -14,7 +14,7 @@
             }
         },
         "Anchor": {
-            "@id": "https://trustbloc.dev/ns/activityanchors#Anchor",
+            "@id": "https://w3id.org/activityanchors#Anchor",
             "@context": {
                 "@version": 1.1,
                 "@protected": true,
@@ -22,7 +22,7 @@
                 "id": "@id",
                 "type": "@type",
 
-                "activityanchors": "https://trustbloc.dev/ns/activityanchors#",
+                "activityanchors": "https://w3id.org/activityanchors#",
         
                 "coreIndex": "activityanchors:coreIndex",
                 "operationCount": "activityanchors:operationCount",
@@ -32,7 +32,7 @@
             }
         },
         "AnchorCredentialReference": {
-            "@id": "https://trustbloc.dev/ns/activityanchors#AnchorCredentialReference",
+            "@id": "https://w3id.org/activityanchors#AnchorCredentialReference",
             "@context": {
                 "@version": 1.1,
                 "@protected": true,
@@ -42,7 +42,7 @@
             }
         },
         "ContentAddressedStorage": {
-            "@id": "https://trustbloc.dev/ns/activityanchors#ContentAddressedStorage",
+            "@id": "https://w3id.org/activityanchors#ContentAddressedStorage",
             "@context": {
                 "@version": 1.1,
                 "@protected": true,
@@ -50,7 +50,7 @@
                 "id": "@id",
                 "type": "@type",
 
-                "activityanchors": "https://trustbloc.dev/ns/activityanchors#",
+                "activityanchors": "https://w3id.org/activityanchors#",
         
                 "cid": "activityanchors:contentIdentifier"
             }
