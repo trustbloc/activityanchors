@@ -3,6 +3,54 @@
         "@version": 1.1,
         "@protected": true,
 
+        "AnchorEvent": {
+            "@id": "https://w3id.org/activityanchors#AnchorEvent",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type",
+
+                "aa": "https://w3id.org/activityanchors#",
+                "as": "https://www.w3.org/ns/activitystreams#",
+                
+                "previous": "aa:previous"
+            }
+        },
+        "AnchorIndex": {
+            "@id": "https://w3id.org/activityanchors#AnchorIndex",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type",
+
+                "aa": "https://w3id.org/activityanchors#",
+                "as": "https://www.w3.org/ns/activitystreams#",
+                
+                "resources": {
+                    "@id": "aa:resources",
+                    "@container": "@list"
+                }
+            }
+        },
+        "AnchorResource": {
+            "@id": "https://w3id.org/activityanchors#AnchorResource",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type",
+
+                "aa": "https://w3id.org/activityanchors#",
+                "as": "https://www.w3.org/ns/activitystreams#",
+                
+                "previousAnchor": "aa:previousAnchor"
+            }
+        },
         "AnchorCredential": {
             "@id": "https://w3id.org/activityanchors#AnchorCredential",
             "@context": {
@@ -11,24 +59,6 @@
 
                 "id": "@id",
                 "type": "@type"
-            }
-        },
-        "Anchor": {
-            "@id": "https://w3id.org/activityanchors#Anchor",
-            "@context": {
-                "@version": 1.1,
-                "@protected": true,
-
-                "id": "@id",
-                "type": "@type",
-
-                "activityanchors": "https://w3id.org/activityanchors#",
-        
-                "coreIndex": "activityanchors:coreIndex",
-                "operationCount": "activityanchors:operationCount",
-                "namespace": "activityanchors:namespace",
-                "previousAnchors": "activityanchors:previousAnchors",
-                "version": "activityanchors:version"
             }
         },
         "AnchorCredentialReference": {
@@ -50,9 +80,9 @@
                 "id": "@id",
                 "type": "@type",
 
-                "activityanchors": "https://w3id.org/activityanchors#",
+                "aa": "https://w3id.org/activityanchors#",
         
-                "cid": "activityanchors:contentIdentifier"
+                "cid": "aa:contentIdentifier"
             }
         }
     }
