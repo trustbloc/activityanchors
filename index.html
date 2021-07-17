@@ -914,10 +914,10 @@
           </section>
 
           <section class="normative">
-            <h4>Create Activity</h4>
+            <h4>Accept Anchor Activity</h4>
 
             <p>
-              A Witness promises to include an anchor activity into their ledger using a <i>Create</i> activity populated with its linked data proof
+              A Witness promises to include an anchor activity into their ledger using a <i>Accept</i> activity populated with its linked data proof
               of an <i>AnchorCredential</i> received in a previous <i>Offer</i>.
               A reference to the previously offered object is populated into the <i>object</i> field.
               The Witness includes the time range when the anchor activity will become included into their ledger using <i>startTime</i> and <i>endTime</i> fields.
@@ -935,15 +935,15 @@
                   "https://w3id.org/activityanchors/v1"
                 ],
                 "id": "https://witness1.example.com/services/anchor/activities/87bcd005-abb6-433d-a889-18bc1ce84988",
-                "type": "Create",
+                "type": "Accept",
                 "actor": "https://witness1.example.com/services/anchor",
                 "to": [
                   "https://sally.example.com/services/anchor",
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
-                "object": {
-                    "type": "AnchorProof",
-                    "id": "https://witness1.example.com/proofs/94b05d0a-26dd-4554-b17b-b1c1623be10d"
+                "object": "https://sally.example.com/services/anchor/activities/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
+                "result": {
+                    "type": "AnchorTimestamp",
                     "inReplyTo": "http://sally.example.com/anchors/ed7c2d19-be27-44d4-b393-d3ec9775a1d1",
                     "startTime": "2021-01-27T09:30:15Z",
                     "endTime": "2021-01-27T09:40:15Z",
@@ -974,14 +974,6 @@
 
           </section>
 
-          <section class="normative">
-            <h4>Like Activity</h4>
-  
-            <p class="issue" title="Acknowledgement">
-              Discuss usage of Like as an acknowledgement.
-            </p>
-          
-          </section>  
         </section>
 
         <section class="normative">
