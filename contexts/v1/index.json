@@ -61,8 +61,32 @@
                 "type": "@type"
             }
         },
-        "AnchorTimestamp": {
+        "AnchorWitness": {
+            "@id": "https://w3id.org/activityanchors#AnchorWitness",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type"
+            }
+        },
+        "AnchorProof": {
             "@id": "https://w3id.org/activityanchors#AnchorProof",
+            "@context": {
+                "@version": 1.1,
+                "@protected": true,
+
+                "id": "@id",
+                "type": "@type",
+
+                "sec": "https://w3id.org/security#",
+
+                "proof": {"@id": "sec:proof", "@type": "@id", "@container": "@graph"}
+            }
+        },
+        "AnchorReceipt": {
+            "@id": "https://w3id.org/activityanchors#AnchorReceipt",
             "@context": {
                 "@version": 1.1,
                 "@protected": true,

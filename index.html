@@ -344,8 +344,8 @@
               <li>Following: provides a collection (or ordered collection) of the other Activity Anchor Servers the server is following.</li>
               <li>Witnesses: provides a collection (or ordered collection) of the other Activity Anchor Servers that act as witnesses.</li>
               <li>Witnessing: provides a collection (or ordered collection) of the other Activity Anchor Servers the server is witnessing.</li>
-              <li>Likes: provides an ordered collection of the witness activities sent by the Activity Anchor Server.</li>
-              <li>Liked: provides an ordered collection of the witness activities received by the Activity Anchor Server.</li>
+              <li>Likes: provides an ordered collection of the processed and replicated anchor activities sent by an Activity Anchor Server.</li>
+              <li>Liked: provides an ordered collection of the anchor activities processed and replicated by the Activity Anchor Server.</li>
               <li>Shares: provides an ordered collection of the propagation (announce) activities sent by the Activity Anchor Server.</li>
             </ul>
           </section>
@@ -726,9 +726,9 @@
           <h3>Witness ActivityPub</h3>
 
           <section class="normative">
-            <h4>InviteWitness Activity</h4>
+            <h4>Invite Witness Activity</h4>
             <p>
-              An Activity Anchor Server invites another Activity Anchor Server to be a witness by performing an HTTP POST of an <i>InviteWitness</i> activity to its ActivityPub inbox endpoint.
+              An Activity Anchor Server invites another Activity Anchor Server to be a witness by performing an HTTP POST of an <i>Invite</i> activity containing an <i>AnchorWitness</i> target to its ActivityPub inbox endpoint.
             </p>
 
             <pre class="example highlight" title="Request to invite an Activity Anchor Server to be a witness">
@@ -743,9 +743,13 @@
                     "https://w3id.org/activityanchors/v1"
                   ],
                   "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
-                  "type": "InviteWitness",
                   "to": "https://alice.example.com/services/anchor",
-                  "actor": "https://sally.example.com/services/anchor"
+                  "type": "Invite",
+                  "actor": "https://sally.example.com/services/anchor",
+                  "target": {
+                    "type": "AnchorWitness",
+                    "id": "https://alice.example.com/services/anchor"
+                  }
                 }
               </pre>
 
@@ -755,9 +759,9 @@
           </section>
 
           <section class="normative">
-            <h4>Accept InviteWitness Activity</h4>
+            <h4>Accept Invite Witness Activity</h4>
             <p>
-              An Activity Anchor Server accepts an InviteWitness request by sending an HTTP POST of a <i>Accept</i> activity to the requesting Activity Anchor Server's ActivityPub inbox endpoint.
+              An Activity Anchor Server accepts an Invite Witness request by sending an HTTP POST of a <i>Accept</i> activity to the requesting Activity Anchor Server's ActivityPub inbox endpoint.
               Upon receiving this activity, the requesting Activity Anchor Server adds the actor to its collection of 'witnesses'.
               Refer to <a href="https://www.w3.org/TR/activitypub/#accept-activity-inbox">ActivityPub</a> for guidance.
             </p>
@@ -780,8 +784,12 @@
                   "object": {
                       "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
                       "to": "https://alice.example.com/services/anchor",
-                      "type": "InviteWitness",
+                      "type": "Invite",
                       "actor": "https://sally.example.com/services/anchor",
+                      "target": {
+                        "type": "AnchorWitness",
+                        "id": "https://alice.example.com/services/anchor"
+                      }
                   }
                 }
               </pre>
@@ -794,7 +802,7 @@
           <section class="normative">
             <h4>Reject InviteWitness Activity</h4>
             <p>
-              An Activity Anchor Server rejects an InviteWitness request by sending an HTTP POST of a <i>Reject</i> activity to the requesting Activity Anchor Server's ActivityPub inbox endpoint.
+              An Activity Anchor Server rejects an Invite Witness request by sending an HTTP POST of a <i>Reject</i> activity to the requesting Activity Anchor Server's ActivityPub inbox endpoint.
               Refer to <a href="https://www.w3.org/TR/activitypub/#reject-activity-inbox">ActivityPub</a> for guidance.
             </p>
 
@@ -816,8 +824,12 @@
                   "object": {
                       "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
                       "to": "https://alice.example.com/services/anchor",
-                      "type": "InviteWitness",
+                      "type": "Invite",
                       "actor": "https://sally.example.com/services/anchor",
+                      "target": {
+                        "type": "AnchorWitness",
+                        "id": "https://alice.example.com/services/anchor"
+                      }
                   }
                 }
               </pre>
@@ -856,6 +868,9 @@
                   "https://sally.example.com/services/anchor/witnesses",
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
+                "target": {
+                  "type": "AnchorWitness"
+                }
                 "startTime": "2021-01-27T09:30:10Z",
                 "endTime": "2021-01-27T09:31:10Z",
                 "object": {
@@ -941,18 +956,26 @@
                   "https://sally.example.com/services/anchor",
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
-                "object": "https://sally.example.com/services/anchor/activities/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
+                "object": {
+                  "id": "https://sally.example.com/services/anchor/activities/9052018f-9530-4aef-8a46-40bde9445a25",
+                  "to": "https://witness1.example.com/services/anchor",
+                  "type": "Offer",
+                  "actor": "https://sally.example.com/services/anchor",
+                  "target": {
+                    "type": "AnchorWitness"
+                  }  
+                },
                 "result": {
-                    "type": "AnchorTimestamp",
+                    "type": "AnchorReceipt",
                     "inReplyTo": "http://sally.example.com/anchors/ed7c2d19-be27-44d4-b393-d3ec9775a1d1",
                     "startTime": "2021-01-27T09:30:15Z",
                     "endTime": "2021-01-27T09:40:15Z",
                     "attachment": [{
                       "@context": [
-                          "https://www.w3.org/2018/credentials/v1",
+                          "https://w3id.org/activityanchors/v1",
                           "https://w3id.org/jws/v1"
                       ],    
-                      "type": "VerifiablePresentation",
+                      "type": "AnchorProof",
                       "proof": {
                           "type": "JsonWebSignature2020",
                           "proofPurpose": "assertionMethod",
@@ -972,6 +995,17 @@
               See <a href="#anchorcredential"></a>.
             </p>
 
+            <p class="issue" title="Log-specific attachments">
+              Determine if it makes sense to also include log-specific attachments such as signed certificate timestamps.
+            </p>
+          </section>
+
+          <section class="normative">
+            <h4>Reject Anchor Activity</h4>
+
+            <p class="issue" title="Provide description">
+              TODO: Provide description and example for Reject.
+            </p>
           </section>
 
         </section>
