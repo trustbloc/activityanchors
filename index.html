@@ -20,11 +20,6 @@
             publisher: "W3C CCG",
             status: "Draft Community Group Report"
           },
-          "CID": {
-            title: "CID (Content IDentifier) Specification",
-            href: "https://github.com/multiformats/cid",
-            publisher: "Multiformats"
-          },
           "HASHLINK": {
             title: "Cryptographic Hyperlinks",
             date: "May 2021",
@@ -32,6 +27,28 @@
             authors: [
               "M. Sporny",
               "L. Rosenthol"
+            ],
+            status: "Internet-Draft",
+            publisher: "IETF"
+          },
+          "MULTIHASH": {
+            title: "The Multihash Data Format",
+            date: "February 2021",
+            href: "https://tools.ietf.org/html/draft-multiformats-multihash-02",
+            authors: [
+              "J. Benet",
+              "M. Sporny"
+            ],
+            status: "Internet-Draft",
+            publisher: "IETF"
+          },
+          "MULTIBASE": {
+            title: "The Multibase Data Format",
+            date: "February 2021",
+            href: "https://tools.ietf.org/html/draft-multiformats-multibase-03",
+            authors: [
+              "J. Benet",
+              "M. Sporny"
             ],
             status: "Internet-Draft",
             publisher: "IETF"
@@ -215,11 +232,7 @@
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
                 "published": "2021-01-27T09:30:10Z",
-                "target": {
-                  "id":  "https://sally.example.com/cas/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
-                  "type": "ContentAddressedStorage",
-                  "cid":  "bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y"
-                },
+                "target": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1",
                 "object": {
                   "@context": [
                     "https://www.w3.org/2018/credentials/v1",
@@ -372,11 +385,7 @@
                 "object": {
                   "id": "http://sally.example.com/anchors/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
                   "type": "AnchorCredentialReference",
-                  "target": {
-                    "id":  "https://sally.example.com/cas/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
-                    "type": "ContentAddressedStorage",
-                    "cid":  "bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y"
-                  }
+                  "target": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1"
                 }
               }
             </pre>
@@ -404,11 +413,7 @@
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
                 "published": "2021-01-27T09:30:10Z",
-                "target": {
-                  "id":  "https://sally.example.com/cas/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
-                  "type": "ContentAddressedStorage",
-                  "cid":  "bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y"
-                },
+                "target": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1",
                 "object": {
                   "@context": [
                     "https://www.w3.org/2018/credentials/v1",
@@ -470,11 +475,7 @@
                       ],
                       "id": "http://sally.example.com/anchors/bafkreihwsnuregceqh263vgdathcprnbvatyat6h6mu7ipjhhodcdbyhoy",
                       "type": "AnchorCredentialReference",
-                      "target": {
-                        "id":  "https://sally.example.com/cas/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
-                        "type": "ContentAddressedStorage",
-                        "cid":  "bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y"
-                      }
+                      "target": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1"
                     }
                   ]
                 }
@@ -511,11 +512,7 @@
                     {
                       "id": "http://sally.example.com/anchors/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
                       "type": "AnchorCredentialReference",
-                      "target": {
-                        "id":  "https://sally.example.com/cas/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
-                        "type": "ContentAddressedStorage",
-                        "cid":  "bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y"
-                      },
+                      "target": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1",
                       "object": {
                         "@context": [
                           "https://www.w3.org/2018/credentials/v1",
@@ -989,12 +986,12 @@
                 {
                   "rel": "working-copy",
                   "type": "application/ld+json",
-                  "href": "https://sally.example.com/cas/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y"
+                  "href": "https://sally.example.com/cas/uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ"
                 },
                 {
                   "rel": "working-copy",
                   "type": "application/ld+json",
-                  "href": "https://replica.example.com/cas/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y"
+                  "href": "https://replica.example.com/cas/uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ"
                 }
               ]
             }
@@ -1018,11 +1015,11 @@
             <h4>WebCAS</h4>
             <p>
               Activity Anchor Servers expose a CAS endpoint to provide access to anchor content.
-              Resources are retrieved by sending a HTTP GET to the Server's CAS path with the content identifier [[CID]] of the resource.
+              Resources are retrieved by sending a HTTP GET to the Server's CAS path with the multihash [[MULTIHASH]] (with multibase [[MULTIBASE]] prefix) of the resource.
             </p>
 
             <pre class="example highlight" title="Retrieve content from WebCAS (request).">
-              GET /cas/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y HTTP/1.1
+              GET /cas/uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ HTTP/1.1
               Host: sally.example.com
               Accept-Encoding: gzip, deflate
             </pre>
