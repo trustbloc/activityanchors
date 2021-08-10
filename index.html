@@ -560,7 +560,8 @@
                   "id": "https://sally.example.com/activities/9052018f-9530-4aef-8a46-40bde9445a25",
                   "type": "Follow",
                   "to": "https://alice.example.com/services/anchor",
-                  "actor": "https://sally.example.com/services/anchor"
+                  "actor": "https://sally.example.com/services/anchor",
+                  "object": "https://alice.example.com/services/anchor"
                 }
               </pre>
 
@@ -593,7 +594,8 @@
                       "to": "https://alice.example.com/services/anchor",
                       "type": "Follow",
                       "actor": "https://sally.example.com/services/anchor",
-                  }                  
+                      "object": "https://alice.example.com/services/anchor"
+                    }
                 }
               </pre>
 
@@ -626,7 +628,8 @@
                       "to": "https://alice.example.com/services/anchor",
                       "type": "Follow",
                       "actor": "https://sally.example.com/services/anchor",
-                  }                  
+                      "object": "https://alice.example.com/services/anchor"
+                    }
                 }
               </pre>
 
@@ -652,7 +655,7 @@
           <section class="normative">
             <h4>Invite Witness Activity</h4>
             <p>
-              An Activity Anchor Server invites another Activity Anchor Server to be a witness by performing an HTTP POST of an <i>Invite</i> activity containing an <i>AnchorWitness</i> target to its ActivityPub inbox endpoint.
+              An Activity Anchor Server invites another Activity Anchor Server to be a witness by performing an HTTP POST of an <i>Invite</i> activity containing a <i>witnesses</i> object to its ActivityPub inbox endpoint.
             </p>
 
             <pre class="example highlight" title="Request to invite an Activity Anchor Server to be a witness">
@@ -670,10 +673,8 @@
                   "to": "https://alice.example.com/services/anchor",
                   "type": "Invite",
                   "actor": "https://sally.example.com/services/anchor",
-                  "target": {
-                    "type": "AnchorWitness",
-                    "id": "https://alice.example.com/services/anchor"
-                  }
+                  "object": "https://w3id.org/activityanchors#AnchorWitness",
+                  "target": "https://alice.example.com/services/anchor"
                 }
               </pre>
 
@@ -706,14 +707,11 @@
                   "type": "Accept",
                   "actor": "https://alice.example.com/services/anchor",
                   "object": {
-                      "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
-                      "to": "https://alice.example.com/services/anchor",
-                      "type": "Invite",
-                      "actor": "https://sally.example.com/services/anchor",
-                      "target": {
-                        "type": "AnchorWitness",
-                        "id": "https://alice.example.com/services/anchor"
-                      }
+                    "type": "Invite",
+                    "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
+                    "actor": "https://sally.example.com/services/anchor",
+                    "object": "https://w3id.org/activityanchors#AnchorWitness",
+                    "target": "https://alice.example.com/services/anchor"
                   }
                 }
               </pre>
@@ -746,14 +744,11 @@
                   "type": "Reject",
                   "actor": "https://alice.example.com/services/anchor",
                   "object": {
-                      "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
-                      "to": "https://alice.example.com/services/anchor",
-                      "type": "Invite",
-                      "actor": "https://sally.example.com/services/anchor",
-                      "target": {
-                        "type": "AnchorWitness",
-                        "id": "https://alice.example.com/services/anchor"
-                      }
+                    "type": "Invite",
+                    "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
+                    "actor": "https://sally.example.com/services/anchor",
+                    "object": "https://w3id.org/activityanchors#AnchorWitness",
+                    "target": "https://alice.example.com/services/anchor"
                   }
                 }
               </pre>
@@ -792,9 +787,7 @@
                   "https://sally.example.com/services/anchor/witnesses",
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
-                "target": {
-                  "type": "AnchorWitness"
-                }
+                "target": "https://w3id.org/activityanchors#AnchorWitness",
                 "startTime": "2021-01-27T09:30:10Z",
                 "endTime": "2021-01-27T09:31:10Z",
                 "object": {
@@ -823,7 +816,7 @@
             <h4>Accept Anchor Activity</h4>
 
             <p>
-              A Witness promises to include an anchor activity into their ledger using a <i>Accept</i> activity populated with its linked data proof
+              A Witness promises to include an anchor event into their ledger using a <i>Accept</i> activity populated with its linked data proof
               of an <i>AnchorCredential</i> received in a previous <i>Offer</i>.
               A reference to the previously offered object is populated into the <i>object</i> field.
               The Witness includes the time range when the anchor activity will become included into their ledger using <i>startTime</i> and <i>endTime</i> fields.
@@ -852,9 +845,7 @@
                   "to": "https://witness1.example.com/services/anchor",
                   "type": "Offer",
                   "actor": "https://sally.example.com/services/anchor",
-                  "target": {
-                    "type": "AnchorWitness"
-                  }  
+                  "target": "https://w3id.org/activityanchors#AnchorWitness"
                 },
                 "result": {
                     "type": "AnchorReceipt",
