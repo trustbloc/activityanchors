@@ -634,6 +634,40 @@
           </section>
 
           <section class="normative">
+            <h4>Undo Follow Activity</h4>
+              <p>
+                An Activity Anchor Server requests to stop following by sending an HTTP POST of a <i>Undo</i> activity to an Activity Anchor Server's ActivityPub inbox endpoint.
+                Refer to <a href="https://www.w3.org/TR/activitypub/#undo-activity-outbox">ActivityPub</a> for guidance. 
+              </p>
+
+              <pre class="example highlight" title="Reject follow request from an Activity Anchor Server">
+                POST /services/anchor/inbox HTTP/1.1
+                Host: sally.example.com
+                Content-Type: application/ld+json; profile="https://www.w3.org/ns/activitystreams"
+                Accept-Encoding: gzip, deflate
+  
+                {
+                  "@context": "https://www.w3.org/ns/activitystreams",
+                  "id": "https://sally.example.com/activities/e017e49a-6256-44a0-855d-5dc304ae67f7",
+                  "to": "https://alice.example.com/services/anchor",
+                  "type": "Undo",
+                  "actor": "https://sally.example.com/services/anchor",
+                  "object": {
+                      "id": "https://sally.example.com/activities/9052018f-9530-4aef-8a46-40bde9445a25",
+                      "to": "https://alice.example.com/services/anchor",
+                      "type": "Follow",
+                      "actor": "https://sally.example.com/services/anchor",
+                      "object": "https://alice.example.com/services/anchor"
+                    }
+                }
+              </pre>
+
+              <p>
+                On success, HTTP status code 200 is returned.
+              </p>  
+          </section>          
+
+          <section class="normative">
             <h4>Like Activity</h4>
   
             <p class="issue" title="Acknowledgement">
@@ -717,7 +751,7 @@
           </section>
 
           <section class="normative">
-            <h4>Reject InviteWitness Activity</h4>
+            <h4>Reject Invite Witness Activity</h4>
             <p>
               An Activity Anchor Server rejects an Invite Witness request by sending an HTTP POST of a <i>Reject</i> activity to the requesting Activity Anchor Server's ActivityPub inbox endpoint.
               Refer to <a href="https://www.w3.org/TR/activitypub/#reject-activity-inbox">ActivityPub</a> for guidance.
@@ -738,6 +772,43 @@
                   "to": "https://sally.example.com/services/anchor",
                   "type": "Reject",
                   "actor": "https://alice.example.com/services/anchor",
+                  "object": {
+                    "type": "Invite",
+                    "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
+                    "actor": "https://sally.example.com/services/anchor",
+                    "object": "https://w3id.org/activityanchors#AnchorWitness",
+                    "target": "https://alice.example.com/services/anchor"
+                  }
+                }
+              </pre>
+
+            <p>
+              On success, HTTP status code 200 is returned.
+            </p>
+          </section>
+
+          <section class="normative">
+            <h4>Undo Invite Witness Activity</h4>
+            <p>
+              An Activity Anchor Server notifies a Witness that they have been removed by sending an HTTP POST of a <i>Undo</i> activity to an Activity Anchor Server's ActivityPub inbox endpoint.
+              Refer to <a href="https://www.w3.org/TR/activitypub/#undo-activity-outbox">ActivityPub</a> for guidance.
+            </p>
+
+            <pre class="example highlight" title="Reject invite witness request from an Activity Anchor Server">
+                POST /services/anchor/inbox HTTP/1.1
+                Host: sally.example.com
+                Content-Type: application/ld+json; profile="https://www.w3.org/ns/activitystreams"
+                Accept-Encoding: gzip, deflate
+
+                {
+                  "@context": [
+                    "https://www.w3.org/ns/activitystreams",
+                    "https://w3id.org/activityanchors/v1"
+                  ],
+                  "id": "https://sally.example.com/activities/b013e49a-6256-24a0-855d-1dc304ar67f7",
+                  "to": "https://alice.example.com/services/anchor",
+                  "type": "Undo",
+                  "actor": "https://sally.example.com/services/anchor",
                   "object": {
                     "type": "Invite",
                     "id": "https://sally.example.com/activities/7052018f-9530-3aef-8a46-20bde9445a21",
