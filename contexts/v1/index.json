@@ -30,9 +30,9 @@
                 "aa": "https://w3id.org/activityanchors#",
                 "as": "https://www.w3.org/ns/activitystreams#",
                 
-                "resources": {
-                    "@id": "aa:resources",
-                    "@container": "@list"
+                "metadata": {
+                    "@id": "aa:metadata",
+                    "@type": "@json"
                 }
             }
         },

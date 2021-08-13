@@ -127,7 +127,7 @@
                   "type": "AnchorIndex",
                   "generator": "https://example.com/spec#v1",
                   "url": "hl:uEiD2k2kSGESB9e3UwwTOJ8WhqCeAT8fzKfQ9JzuGIYcHdg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlEMmsya1NHRVNCOWUzVXd3VE9KOFdocUNlQVQ4ZnpLZlE5Snp1R0lZY0hkZ3hCaXBmczovL2JhZmtyZWlod3NudXJlZ2NlcWgyNjN2Z2RhdGhjcHJuYnZhdHlhdDZoNm11N2lwamhob2RjZGJ5aG95",
-                  "resources": [
+                  "metadata": [
                     "urn:multihash:uEiDahaOGH-liLLdDtTxEAdc8i-cfCz-WUcQdRJheMVNn3A",
                     {
                       "type": "AnchorResource",
@@ -675,6 +675,11 @@
               Processing an anchor event MAY also result in the creation of an additional reference to the anchor event due to replication.
               The <i>result</i> property MAY be included to allow other actors to discover the additional anchor reference.
               Note: the new anchor reference MAY contain multiple links to the anchor event (representing multiple replication sources).
+            </p>
+
+            <p>
+              Anchor events may also be associated with additional attached objects.
+              These additional objects
             </p>
             
             <pre class="example highlight" title="Notifying the originator of successful processing and replication">
