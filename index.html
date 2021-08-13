@@ -669,13 +669,100 @@
 
           <section class="normative">
             <h4>Like Activity</h4>
-  
-            <p class="issue" title="Acknowledgement">
-              Discuss usage of Like as an acknowledgement.
+            <p>
+              An Activity Anchor Server MAY notify other actors that it has successfully processed an anchor event using the <i>Like</i> activity.
+              In particular, it is useful for the originator of the anchor to discover other actors that are processing the events it is producing.
+              Processing an anchor event MAY also result in the creation of an additional reference to the anchor event due to replication.
+              The <i>result</i> property MAY be included to allow other actors to discover the additional anchor reference.
+              Note: the new anchor reference MAY contain multiple links to the anchor event (representing multiple replication sources).
             </p>
-          
+            
+            <pre class="example highlight" title="Notifying the originator of successful processing and replication">
+              POST /services/anchor/inbox HTTP/1.1
+              Host: alice.example.com
+              Content-Type: application/ld+json; profile="https://www.w3.org/ns/activitystreams"
+              Accept-Encoding: gzip, deflate
+
+              {
+                "@context": [
+                  "https://www.w3.org/ns/activitystreams",
+                  "https://w3id.org/activityanchors/v1"
+                ],
+                "id": "https://sally.example.com/services/anchor/activities/d2f4b508-021c-48a2-ad08-8949970366b2",
+                "type": "Like",
+                "actor": "https://sally.example.com/services/anchor",
+                "to": [
+                  "https://alice.example.com/services/anchor",
+                  "https://www.w3.org/ns/activitystreams#Public"
+                ],
+                "published": "2021-01-27T09:30:10Z",
+                "object": {
+                  "type": "AnchorReference",
+                  "url": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1"
+                },
+                "result": {
+                  "type": "AnchorReference",
+                  "url": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-BeDhodHRwczovL2V4YW1wbGUuY29tL2NmMTQ5YTY4LTA4NTYtNDMwNC1hOWVjLTM0NzU2NzU1NDE2Yw"
+                }
+              }
+            </pre>
+
+            <p>
+              On success, HTTP status code 200 is returned.
+            </p>
           </section>
   
+          <section class="normative">
+            <h4>Undo Like Activity</h4>
+            <p>
+              An Activity Anchor Server MAY notify other actors that it no longer uses an anchor (or stops replicating the anchor) that it previously liked.
+              Refer to <a href="https://www.w3.org/TR/activitypub/#undo-activity-outbox">ActivityPub</a> for guidance. 
+            </p>
+            
+            <pre class="example highlight" title="Notifying the originator that the anchor is no longer liked">
+              POST /services/anchor/inbox HTTP/1.1
+              Host: alice.example.com
+              Content-Type: application/ld+json; profile="https://www.w3.org/ns/activitystreams"
+              Accept-Encoding: gzip, deflate
+
+              {
+                "@context": [
+                  "https://www.w3.org/ns/activitystreams",
+                  "https://w3id.org/activityanchors/v1"
+                ],
+                "id": "https://sally.example.com/activities/e017e49a-6256-44a0-855d-5dc304ae67f7",
+                "to": [
+                  "https://alice.example.com/services/anchor",
+                  "https://www.w3.org/ns/activitystreams#Public"
+                ],
+                "type": "Undo",
+                "actor": "https://sally.example.com/services/anchor",
+                "object": {
+                  "id": "https://sally.example.com/services/anchor/activities/d2f4b508-021c-48a2-ad08-8949970366b2",
+                  "type": "Like",
+                  "actor": "https://sally.example.com/services/anchor",
+                  "to": [
+                    "https://alice.example.com/services/anchor",
+                    "https://www.w3.org/ns/activitystreams#Public"
+                  ],
+                  "published": "2021-01-27T09:30:10Z",
+                  "object": {
+                    "type": "AnchorReference",
+                    "url": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1"
+                  },
+                  "result": {
+                    "type": "AnchorReference",
+                    "url": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-BeDhodHRwczovL2V4YW1wbGUuY29tL2NmMTQ5YTY4LTA4NTYtNDMwNC1hOWVjLTM0NzU2NzU1NDE2Yw"
+                  }
+                }
+              }
+            </pre>
+
+            <p>
+              On success, HTTP status code 200 is returned.
+            </p>
+          </section>
+
         </section>
 
         <section class="normative" id='witness-activitypub'>
