@@ -109,12 +109,17 @@
             <h4>AnchorEvent</h4>
 
             <p>
-              An operation batch is represented as an <i>AnchorEvent</i>.
-              Hashlinks [[HASHLINK]] are used to link objects to the AnchorEvent.  
+              A node in the anchor graph is represented as an <i>AnchorEvent</i>.
+              Hashlinks [[HASHLINK]] are used to link parent nodes (<i>AnchorEvent</i>).
+              An operation batch is represented as an <i>AnchorIndex</i> and is attached to an AnchorEvent.
             </p>
 
-            <pre class="example highlight" title="Operation batch">
+            <pre class="example highlight" title="Anchor graph node">
             {
+              "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                "https://w3id.org/activityanchors/v1",
+              ],
               "type": "AnchorEvent",
               "attributedTo": "ipns://k51qzi5uqu5dl3ua2aal8vdw82j4i8s112p495j1spfkd2blqygghwccsw1z0p",
               "published": "2021-01-27T09:30:00Z",
@@ -149,7 +154,7 @@
             }         
             </pre>
 
-            <pre class="example highlight" title="Cryptographic Hyperlink Example">
+            <pre class="example highlight" title="Cryptographic Hyperlink (Hashlink) Example">
               hl:uEiAsiwjaXOYDmOHxmvDl3Mx0TfJ0uCar5YXqumjFJUNIBg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBc2l3amFYT1lEbU9IeG12RGwzTXgwVGZKMHVDYXI1WVhxdW1qRkpVTklCZ3hCaXBmczovL2JhZmtyZWlibXJtZW51eGhnYW9tb2Q0bTI2ZHM1enRkdWp4emhqb2JndnBzeWwydjJuZGNza3EyaWF5",
             </pre>
 
@@ -168,9 +173,10 @@
 
             <p>
               A signed operation batch is represented as an <i>AnchorCredential</i>.
+              An <i>AnchorIndex</i> object is contained within the credentialSubject.
             </p>
 
-            <pre class="example highlight" title="Operation batch">
+            <pre class="example highlight" title="Signed AnchorIndex">
               {
                 "@context": [
                   "https://www.w3.org/2018/credentials/v1",
@@ -186,7 +192,7 @@
                 "issuer": "https://sally.example.com/services/anchor",
                 "issuanceDate": "2021-01-27T09:30:10Z",
                 "credentialSubject": {
-                  "type": "AnchorEvent"
+                  "type": "AnchorIndex"
                 },
                 "proof": [{
                   "type": "JsonWebSignature2020",
@@ -215,8 +221,10 @@
               }
             </pre>
 
-            The anchor is embedded within an Activity during propagation flows.
-            The Activity includes information about the CAS.
+            <p>
+              The <i>AnchorEvent</i>> object is embedded within an Activity during propagation flows.
+              The Activity also includes a hashlink to the stored <i>AnchorEvent</i>.
+            </p>
 
             <pre class="example highlight" title="Anchor as an AnchorCredential wrapped in a Create Activity">
               {
@@ -232,24 +240,30 @@
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
                 "published": "2021-01-27T09:30:10Z",
-                "target": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1",
                 "object": {
-                  "@context": [
-                    "https://www.w3.org/2018/credentials/v1",
-                    "https://www.w3.org/ns/activitystreams",
-                    "https://w3id.org/activityanchors/v1"
-                  ],
-                  "id": "http://sally.example.com/anchors/642bab75-76a4-4b5f-98bb-794467ad5891",
-                  "type": [
-                    "VerifiableCredential",
-                    "AnchorCredential"
-                  ],
-                  "issuer": "https://sally.example.com/services/anchor",
-                  "issuanceDate": "2021-01-27T09:30:10Z",
-                  "credentialSubject": {
-                    "type": "AnchorEvent"
-                  },
-                  "proof": [{}]
+                  "type": "AnchorReference",
+                  "url": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1"
+                  "attachment": {
+                    "type": "AnchorEvent",
+                    "attributedTo": "ipns://k51qzi5uqu5dl3ua2aal8vdw82j4i8s112p495j1spfkd2blqygghwccsw1z0p",
+                    "published": "2021-01-27T09:30:00Z",
+                    "parent": [
+                      "hl:uEiAsiwjaXOYDmOHxmvDl3Mx0TfJ0uCar5YXqumjFJUNIBg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBc2l3amFYT1lEbU9IeG12RGwzTXgwVGZKMHVDYXI1WVhxdW1qRkpVTklCZ3hCaXBmczovL2JhZmtyZWlibXJtZW51eGhnYW9tb2Q0bTI2ZHM1enRkdWp4emhqb2JndnBzeWwydjJuZGNza3EyaWF5",
+                      "hl:uEiAn3Y7USoP_lNVX-f0EEu1ajLymnqBJItiMARhKBzAKWg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBbjNZN1VTb1BfbE5WWC1mMEVFdTFhakx5bW5xQkpJdGlNQVJoS0J6QUtXZ3hCaXBmczovL2JhZmtyZWliaDN3aG5pc3VkNzZrbmt2N3o3dWNiZjNrMnJzNmtuaHZhamVybnJkYWJkYmZhb21ha2xp"
+                    ],
+                    "attachment": [{
+                      "@context": [
+                        "https://www.w3.org/2018/credentials/v1",
+                        "https://www.w3.org/ns/activitystreams",
+                        "https://w3id.org/activityanchors/v1"
+                      ],
+                      "id": "http://sally.example.com/anchors/642bab75-76a4-4b5f-98bb-794467ad5891",
+                      "type": [
+                        "VerifiableCredential",
+                        "AnchorCredential"
+                      ]
+                    }]
+                  }
                 }
               }
             </pre>
@@ -416,22 +430,24 @@
                   "type": "AnchorReference",
                   "url": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1"
                   "attachment": [{
-                    "@context": [
-                      "https://www.w3.org/2018/credentials/v1",
-                      "https://www.w3.org/ns/activitystreams",
-                      "https://w3id.org/activityanchors/v1"
+                    "type": "AnchorEvent",
+                    "attributedTo": "ipns://k51qzi5uqu5dl3ua2aal8vdw82j4i8s112p495j1spfkd2blqygghwccsw1z0p",
+                    "published": "2021-01-27T09:30:00Z",
+                    "parent": [
+                      "hl:uEiAsiwjaXOYDmOHxmvDl3Mx0TfJ0uCar5YXqumjFJUNIBg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBc2l3amFYT1lEbU9IeG12RGwzTXgwVGZKMHVDYXI1WVhxdW1qRkpVTklCZ3hCaXBmczovL2JhZmtyZWlibXJtZW51eGhnYW9tb2Q0bTI2ZHM1enRkdWp4emhqb2JndnBzeWwydjJuZGNza3EyaWF5",
+                      "hl:uEiAn3Y7USoP_lNVX-f0EEu1ajLymnqBJItiMARhKBzAKWg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBbjNZN1VTb1BfbE5WWC1mMEVFdTFhakx5bW5xQkpJdGlNQVJoS0J6QUtXZ3hCaXBmczovL2JhZmtyZWliaDN3aG5pc3VkNzZrbmt2N3o3dWNiZjNrMnJzNmtuaHZhamVybnJkYWJkYmZhb21ha2xp"
                     ],
-                    "id": "http://sally.example.com/anchors/bafkreihwsnuregceqh263vgdathcprnbvatyat6h6mu7ipjhhodcdbyhoy",
-                    "type": [
-                      "VerifiableCredential",
-                      "AnchorCredential"
-                    ],
-                    "issuer": "https://sally.example.com/services/anchor",
-                    "issuanceDate": "2021-01-27T09:30:10Z",
-                    "credentialSubject": {
-                      "type": "AnchorEvent"
-                    },
-                    "proof": [{}]
+                    "attachment": [{
+                      "@context": [
+                        "https://www.w3.org/2018/credentials/v1",
+                        "https://www.w3.org/ns/activitystreams",
+                        "https://w3id.org/activityanchors/v1"
+                      ],
+                      "type": [
+                        "VerifiableCredential",
+                        "AnchorCredential"
+                      ]  
+                    }]
                   }
                 }
               }
@@ -511,24 +527,26 @@
                     {
                       "type": "AnchorReference",
                       "url": "hl:uEiCsFp-ft8tI1DFGbXs78tw-HS561mMPa3Z6GsGAHElrNQ:uoQ-CeE1odHRwczovL3NhbGx5LmV4YW1wbGUuY29tL2Nhcy91RWlDc0ZwLWZ0OHRJMURGR2JYczc4dHctSFM1NjFtTVBhM1o2R3NHQUhFbHJOUXhCaXBmczovL2JhZmtyZWlmbWMycHo3bjZsamRrZGNydG5wbTU3ZnhiNmR1eGh2dnRkYjV2eG02cTJ5Z2FieXNsbGd1",
-                      "attachment": [{
-                        "@context": [
-                          "https://www.w3.org/2018/credentials/v1",
-                          "https://www.w3.org/ns/activitystreams",
-                          "https://w3id.org/activityanchors/v1"
+                      "attachment": {
+                        "type": "AnchorEvent",
+                        "attributedTo": "ipns://k51qzi5uqu5dl3ua2aal8vdw82j4i8s112p495j1spfkd2blqygghwccsw1z0p",
+                        "published": "2021-01-27T09:30:00Z",
+                        "parent": [
+                          "hl:uEiAsiwjaXOYDmOHxmvDl3Mx0TfJ0uCar5YXqumjFJUNIBg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBc2l3amFYT1lEbU9IeG12RGwzTXgwVGZKMHVDYXI1WVhxdW1qRkpVTklCZ3hCaXBmczovL2JhZmtyZWlibXJtZW51eGhnYW9tb2Q0bTI2ZHM1enRkdWp4emhqb2JndnBzeWwydjJuZGNza3EyaWF5",
+                          "hl:uEiAn3Y7USoP_lNVX-f0EEu1ajLymnqBJItiMARhKBzAKWg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBbjNZN1VTb1BfbE5WWC1mMEVFdTFhakx5bW5xQkpJdGlNQVJoS0J6QUtXZ3hCaXBmczovL2JhZmtyZWliaDN3aG5pc3VkNzZrbmt2N3o3dWNiZjNrMnJzNmtuaHZhamVybnJkYWJkYmZhb21ha2xp"
                         ],
-                        "id": "http://sally.example.com/anchors/bafkreihwsnuregceqh263vgdathcprnbvatyat6h6mu7ipjhhodcdbyhoy",
-                        "type": [
-                          "VerifiableCredential",
-                          "AnchorCredential"
-                        ],
-                        "issuer": "https://sally.example.com/services/anchor",
-                        "issuanceDate": "2021-01-27T09:30:10Z",
-                        "credentialSubject": {
-                          "type": "AnchorEvent"
-                        },
-                        "proof": [{}]
-                      }]
+                        "attachment": [{
+                          "@context": [
+                            "https://www.w3.org/2018/credentials/v1",
+                            "https://www.w3.org/ns/activitystreams",
+                            "https://w3id.org/activityanchors/v1"
+                          ],
+                          "type": [
+                            "VerifiableCredential",
+                            "AnchorCredential"
+                          ]  
+                        }]
+                      }
                     }
                   ]
                 }
@@ -918,7 +936,7 @@
             <h4>Offer Activity</h4>
 
             <p>
-              An Activity Anchor Server sends a <i>preannouncement</i> of an anchor using an <i>Offer</i> activity populated with an <i>AnchorCredential</i>.
+              An Activity Anchor Server sends a <i>preannouncement</i> of an anchor event using an <i>Offer</i> activity populated with an <i>AnchorCredential</i> attachment.
               The <i>AnchorCredential</i> contains a Linked Data Proof from the activity server.
               The <i>Offer</i> activity also includes a <i>startTime</i> and <i>endTime</i> indicating the time period where the Activity Anchor Server will accept
               linked data proofs for inclusion into the anchor activity.
@@ -947,22 +965,24 @@
                 "startTime": "2021-01-27T09:30:10Z",
                 "endTime": "2021-01-27T09:31:10Z",
                 "object": {
-                  "@context": [
-                    "https://www.w3.org/2018/credentials/v1",
-                    "https://www.w3.org/ns/activitystreams",
-                    "https://w3id.org/activityanchors/v1"
+                  "type": "AnchorEvent",
+                  "attributedTo": "ipns://k51qzi5uqu5dl3ua2aal8vdw82j4i8s112p495j1spfkd2blqygghwccsw1z0p",
+                  "published": "2021-01-27T09:30:00Z",
+                  "parent": [
+                    "hl:uEiAsiwjaXOYDmOHxmvDl3Mx0TfJ0uCar5YXqumjFJUNIBg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBc2l3amFYT1lEbU9IeG12RGwzTXgwVGZKMHVDYXI1WVhxdW1qRkpVTklCZ3hCaXBmczovL2JhZmtyZWlibXJtZW51eGhnYW9tb2Q0bTI2ZHM1enRkdWp4emhqb2JndnBzeWwydjJuZGNza3EyaWF5",
+                    "hl:uEiAn3Y7USoP_lNVX-f0EEu1ajLymnqBJItiMARhKBzAKWg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlBbjNZN1VTb1BfbE5WWC1mMEVFdTFhakx5bW5xQkpJdGlNQVJoS0J6QUtXZ3hCaXBmczovL2JhZmtyZWliaDN3aG5pc3VkNzZrbmt2N3o3dWNiZjNrMnJzNmtuaHZhamVybnJkYWJkYmZhb21ha2xp"
                   ],
-                  "id": "http://sally.example.com/anchors/ed7c2d19-be27-44d4-b393-d3ec9775a1d1",
-                  "type": [
-                    "VerifiableCredential",
-                    "AnchorCredential"
-                  ],
-                  "issuer": "https://sally.example.com/services/anchor",
-                  "issuanceDate": "2021-01-27T09:30:10Z",
-                  "credentialSubject": {
-                    "type": "AnchorEvent"
-                  },
-                  "proof": {}
+                  "attachment": [{
+                    "@context": [
+                      "https://www.w3.org/2018/credentials/v1",
+                      "https://www.w3.org/ns/activitystreams",
+                      "https://w3id.org/activityanchors/v1"
+                    ],
+                    "type": [
+                      "VerifiableCredential",
+                      "AnchorCredential"
+                    ]
+                  }]
                 }
               }
             </pre>
@@ -972,7 +992,7 @@
             <h4>Accept Anchor Activity</h4>
 
             <p>
-              A Witness promises to include an anchor event into their ledger using a <i>Accept</i> activity populated with its linked data proof
+              A Witness promises to include an anchor index into their ledger using a <i>Accept</i> activity populated with its linked data proof
               of an <i>AnchorCredential</i> received in a previous <i>Offer</i>.
               A reference to the previously offered object is populated into the <i>object</i> field.
               The Witness includes the time range when the anchor activity will become included into their ledger using <i>startTime</i> and <i>endTime</i> fields.
@@ -1004,25 +1024,25 @@
                   "target": "https://w3id.org/activityanchors#AnchorWitness"
                 },
                 "result": {
-                    "type": "AnchorReceipt",
-                    "inReplyTo": "http://sally.example.com/anchors/ed7c2d19-be27-44d4-b393-d3ec9775a1d1",
-                    "startTime": "2021-01-27T09:30:15Z",
-                    "endTime": "2021-01-27T09:40:15Z",
-                    "attachment": [{
-                      "@context": [
-                          "https://w3id.org/activityanchors/v1",
-                          "https://w3id.org/jws/v1"
-                      ],    
-                      "type": "AnchorProof",
-                      "proof": {
-                          "type": "JsonWebSignature2020",
-                          "proofPurpose": "assertionMethod",
-                          "created": "2021-01-27T09:30:15Z",
-                          "verificationMethod": "did:example:abcd#key",
-                          "domain": "https://witness1.example.com/ledgers/maple2021",
-                          "jws": "eyJ..."  
-                        }
-                    }]
+                  "type": "AnchorReceipt",
+                  "inReplyTo": "http://sally.example.com/anchors/ed7c2d19-be27-44d4-b393-d3ec9775a1d1",
+                  "startTime": "2021-01-27T09:30:15Z",
+                  "endTime": "2021-01-27T09:40:15Z",
+                  "attachment": [{
+                    "@context": [
+                        "https://w3id.org/activityanchors/v1",
+                        "https://w3id.org/jws/v1"
+                    ],    
+                    "type": "AnchorProof",
+                    "proof": {
+                        "type": "JsonWebSignature2020",
+                        "proofPurpose": "assertionMethod",
+                        "created": "2021-01-27T09:30:15Z",
+                        "verificationMethod": "did:example:abcd#key",
+                        "domain": "https://witness1.example.com/ledgers/maple2021",
+                        "jws": "eyJ..."  
+                      }
+                  }]
                 }
               }
             </pre>
