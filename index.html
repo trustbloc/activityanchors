@@ -110,11 +110,37 @@
 
             <p>
               An operation batch is represented as an <i>AnchorEvent</i>.
-              Hashlinks [[HASHLINK]] are used to link objects to the AnchorEvent.  
+              Hashlinks [[HASHLINK]] are used to link objects to the AnchorEvent.
+              The AnchorEvent object contains an <i>attachment</i> property that represent objects related to the AnchorEvent.
             </p>
 
-            <pre class="example highlight" title="Operation batch">
+            <p>
+              The <i>AnchorObject</i> represents general content that is related to the AnchorEvent.
+              The <i>url</i> property identifies the content.
+              The <i>contentObject</i> property enables the content to be embedded within the <i>AnchorObject</i> as JSON.
+            </p>
+
+            <p>
+              The <i>AnchorIndex</i> object represents content that is intended to be consumed by an appropriate processor.
+              The <i>generator</i> property enables the appropriate processor (and version) to be determined.
+              The <i>url</i> property identifies the content.
+              The <i>metadata</i> property identifies objects that the processor uses to consume the content.
+              The primary purpose of <i>metadata</i> is to map the referenced content into the anchoring system.
+              As an example, a processor can associate identifiers (within the referenced content) to prior anchor events.
+            </p>
+
+            <p>
+              Hashlinks may refer to the <i>contentObject</i> within an <i>AnchorObject</i>.
+              Prior to creating the hash in the Hashlink, the contents of the <i>contentObject</i> MUST be canoncialized using the JSON Canonicalization Scheme (JCS) [[RFC8785]].
+              The Hashlink refers to the canonicalized contents of the <i>contentObject</i>.
+            </p>
+
+            <pre class="example highlight" title="AnchorEvent with attachments">
             {
+              "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                "https://w3id.org/activityanchors/v1"
+              ],
               "type": "AnchorEvent",
               "attributedTo": "ipns://k51qzi5uqu5dl3ua2aal8vdw82j4i8s112p495j1spfkd2blqygghwccsw1z0p",
               "published": "2021-01-27T09:30:00Z",
@@ -127,23 +153,26 @@
                   "type": "AnchorIndex",
                   "generator": "https://example.com/spec#v1",
                   "url": "hl:uEiD2k2kSGESB9e3UwwTOJ8WhqCeAT8fzKfQ9JzuGIYcHdg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlEMmsya1NHRVNCOWUzVXd3VE9KOFdocUNlQVQ4ZnpLZlE5Snp1R0lZY0hkZ3hCaXBmczovL2JhZmtyZWlod3NudXJlZ2NlcWgyNjN2Z2RhdGhjcHJuYnZhdHlhdDZoNm11N2lwamhob2RjZGJ5aG95",
-                  "resources": [
-                    "urn:multihash:uEiDahaOGH-liLLdDtTxEAdc8i-cfCz-WUcQdRJheMVNn3A",
-                    {
-                      "type": "AnchorResource",
-                      "id": "urn:multihash:uEiA329wd6Aj36YRmp7NGkeB5ADnVt8ARdMZMPzfXsjwTJA",
-                      "previousAnchor": "hl:uEiAsiwjaXOYDmOHxmvDl3Mx0TfJ0uCar5YXqumjFJUNIBg"
-                    },
-                    {
-                      "type": "AnchorResource",
-                      "id": "urn:multihash:uEiARIc_M1ZE_CmP-xApv_UTqZPncE1xmY0ugAdELz0MCogo",
-                      "previousAnchor": "hl:uEiAn3Y7USoP_lNVX-f0EEu1ajLymnqBJItiMARhKBzAKWg"
-                    }
-                  ]
+                  "metadata": "hl:uEiCrkp_NVZQDeWB5LqC5jK9f2va2BkXk7ySMKNt0Jg85Pg"
                 },
                 {
                   "type": "AnchorObject",
-                  "url": "hl:uEiCrkp_NVZQDeWB5LqC5jK9f2va2BkXk7ySMKNt0Jg85Pg:uoQ-CeEdodHRwczovL2V4YW1wbGUuY29tL2Nhcy91RWlDcmtwX05WWlFEZVdCNUxxQzVqSzlmMnZhMkJrWGs3eVNNS050MEpnODVQZ3hCaXBmczovL2JhZmtyZWlmbHNrcDQydm11YW40d2E2am91YzR5emwyNzNsM2xtYnNmNHR4c2pkYmkzbjJjbWR6emh5"
+                  "url": "hl:uEiCrkp_NVZQDeWB5LqC5jK9f2va2BkXk7ySMKNt0Jg85Pg",
+                  "contentObject": {
+                    "resources": [
+                      {
+                        "id": "urn:multihash:uEiDahaOGH-liLLdDtTxEAdc8i-cfCz-WUcQdRJheMVNn3A"
+                      },
+                      {
+                        "id": "urn:multihash:uEiA329wd6Aj36YRmp7NGkeB5ADnVt8ARdMZMPzfXsjwTJA",
+                        "previousAnchor": "hl:uEiAsiwjaXOYDmOHxmvDl3Mx0TfJ0uCar5YXqumjFJUNIBg"
+                      },
+                      {
+                        "id": "urn:multihash:uEiARIc_M1ZE_CmP-xApv_UTqZPncE1xmY0ugAdELz0MCogo",
+                        "previousAnchor": "hl:uEiAn3Y7USoP_lNVX-f0EEu1ajLymnqBJItiMARhKBzAKWg"
+                      }
+                    ]
+                  }
                 }
               ]
             }         
