@@ -111,22 +111,6 @@
             <p>
               An operation batch is represented as an <i>AnchorEvent</i>.
               Hashlinks [[HASHLINK]] are used to link objects to the AnchorEvent.
-              The AnchorEvent object contains an <i>attachment</i> property that represent objects related to the AnchorEvent.
-            </p>
-
-            <p>
-              The <i>AnchorObject</i> represents general content that is related to the AnchorEvent.
-              The <i>url</i> property identifies the content.
-              The <i>contentObject</i> property enables the content to be embedded within the <i>AnchorObject</i> as JSON.
-            </p>
-
-            <p>
-              The <i>AnchorIndex</i> object represents content that is intended to be consumed by an appropriate processor.
-              The <i>generator</i> property enables the appropriate processor (and version) to be determined.
-              The <i>url</i> property identifies the content.
-              The <i>metadata</i> property identifies objects that the processor uses to consume the content.
-              The primary purpose of <i>metadata</i> is to map the referenced content into the anchoring system.
-              As an example, a processor can associate identifiers (within the referenced content) to prior anchor events.
             </p>
 
             <p>
@@ -135,77 +119,38 @@
               The Hashlink refers to the canonicalized contents of the <i>contentObject</i>.
             </p>
 
-            <pre class="example highlight" title="AnchorEvent with attachments">
+            <pre class="example highlight" title="AnchorEvent">
               {
                 "@context": "https://w3id.org/activityanchors/v1",
-                "type": "AnchorEvent",
-                "attributedTo": "https://example.domain1.com/services/example",
-                "index": "hl:uEiCF5Mr8n7NPsAGenkNIoY0tJtnqDUWMk_XdYpgOm5yNnA",
-                "parent": "hl:uEiAL-T2TdNkqL5gRIX8BZvrXESPOzoIYy98YUBxc5xAG0w:uoQ-BeEJpcGZzOi8vYmFma3JlaWFsN2U2emc1Z3pmaXh6cWVqYnA0YXduNnd4Y2VyNDV0dWNkZGY1NmdjcWRyb29vZWFnMm0",
-                "published": "2021-10-29T18:06:34.554883376Z",
-                "url": "hl:uEiAyUitoMn-ujmlFC6DBW2AlWabxGfVpGw0b3ymcqwzSHQ:uoQ-BeEJpcGZzOi8vYmFma3JlaWJza2l2d3FtdDd2Mmhnc3JpbHVkYXZ3eWJmbGd0cGNncHZuZW5xMmc2N2Znb2t3ZGdzZHU",
-                "attachment": [
-                  {
-                    "contentObject": {
-                      "properties": {
-                        "https://w3id.org/activityanchors#generator": "https://example.com/spec#v1",
-                        "https://w3id.org/activityanchors#resources": [
-                          {
-                            "id": "did:example:uEiAL-T2TdNkqL5gRIX8BZvrXESPOzoIYy98YUBxc5xAG0w:EiCIZ0W-fdodoK39vGPl1rxDJTinYN2kTBhddS9xnen-Aw",
-                            "previousAnchor": "hl:uEiAL-T2TdNkqL5gRIX8BZvrXESPOzoIYy98YUBxc5xAG0w"
-                          }
-                        ]
-                      },
-                      "subject": "hl:uEiA30C_KU_wogvUhJKLUA8bXHqSM_75X1QZQN3z_4VacXQ:uoQ-BeEJpcGZzOi8vYmFma3JlaWJ4MmF4NHV1NzRmY2Jwa2lqZXVsa2Focnd4ZDJzaXo3NTZrN2txbXVieHB0NzZjdnU0bHU"
-                    },
-                    "generator": "https://example.com/spec#v1",
-                    "tag": [
-                      {
-                        "href": "hl:uEiAdjYmJQEhKreYkikrMUfyFPVyEKLmfoHWmKhebWyNpUw",
-                        "rel": [
-                          "witness"
-                        ],
-                        "type": "Link"
-                      }
-                    ],
-                    "type": "AnchorObject",
-                    "url": "hl:uEiCF5Mr8n7NPsAGenkNIoY0tJtnqDUWMk_XdYpgOm5yNnA"
-                  },
-                  {
-                    "contentObject": {
-                      "@context": [
-                        "https://www.w3.org/2018/credentials/v1",
-                        "https://w3id.org/security/suites/jws-2020/v1"
-                      ],
-                      "credentialSubject": "hl:uEiCF5Mr8n7NPsAGenkNIoY0tJtnqDUWMk_XdYpgOm5yNnA",
-                      "id": "https://example2.domain1.com/vc/1da2c6c8-6ef4-4860-be92-45cc88c3614b",
-                      "issuanceDate": "2021-10-29T18:06:34.556862797Z",
-                      "issuer": "https://example2.domain1.com",
-                      "proof": [
+                "object": {
+                  "linkset": [
+                    {
+                      "anchor": "hl:uEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA",
+                      "author": "https://orb.domain2.com/services/orb",
+                      "original": [
                         {
-                          "created": "2021-10-29T18:06:34.566Z",
-                          "domain": "http://example.domain1.com",
-                          "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..XRafN3mZOI-NuEtYWVSxNLCRd-tMg3nOgyHW4ke8P8YoGhu2O5h8t7yMj2lRcpElA1oE7zn_u3_nM6W1TvsXCA",
-                          "proofPurpose": "assertionMethod",
-                          "type": "Ed25519Signature2018",
-                          "verificationMethod": "did:web:example.domain1.com#example"
-                        },
-                        {
-                          "created": "2021-10-29T18:06:34.723037523Z",
-                          "domain": "https://example.domain2.com",
-                          "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Hz-J6lY5Ombe-pj6qv5SVhou_O-zqsBkmtoYEs76wyrZef4YoBm9B0jfYn1o0Iu1cm1g4ent_5xq7SMp5LlUAQ",
-                          "proofPurpose": "assertionMethod",
-                          "type": "Ed25519Signature2018",
-                          "verificationMethod": "did:web:example.domain2.com#example2key"
+                          "href": "data:application/json,%7B%22linkset%22%3A%5B%7B%22anchor%22%3A%22hl%3AuEiBEYPquNVjC7fIduIkd7za-va4KJ5_g6DlQCpBhb8G58w%22%2C%22author%22%3A%22https%3A%2F%2Forb.domain2.com%2Fservices%2Forb%22%2C%22item%22%3A%5B%7B%22href%22%3A%22did%3Aorb%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%3AEiBlWWTU5i71R2uOAq04RZlNC148RN44gRAzSU9t4_hVGg%22%2C%22previous%22%3A%22hl%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiAPvYn4qoOwAQLjtBqur563OgicWQaH4lB1RMh9oEER0Q%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiCQGgEaHyhghhRIsT4hav8GMwRl-EuyGP_DMULTNTfZUg%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiA4SRtKtlBGm-VS78mtZEiAOBysN_ra8zv66Gnw_uJw4A%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%5D%2C%22profile%22%3A%22https%3A%2F%2Fw3id.org%2Forb%23v0%22%7D%5D%7D",
+                          "type": "application/linkset+json"
                         }
                       ],
-                      "type": "VerifiableCredential"
-                    },
-                    "generator": "https://example.com/spec#v1",
-                    "type": "AnchorObject",
-                    "url": "hl:uEiAdjYmJQEhKreYkikrMUfyFPVyEKLmfoHWmKhebWyNpUw"
-                  }
-                ]
+                      "profile": "https://w3id.org/orb#v0",
+                      "related": [
+                        {
+                          "href": "data:application/json,%7B%22linkset%22%3A%5B%7B%22anchor%22%3A%22hl%3AuEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA%22%2C%22profile%22%3A%22https%3A%2F%2Fw3id.org%2Forb%23v0%22%2C%22up%22%3A%5B%7B%22href%22%3A%22hl%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWRwd3FwY3AyMnlsbWV3engzb3ZvaGVtcHVvYjc0cHFvYjZlNGVzbDNoY3F2eGZqdzVvb2E%22%7D%2C%7B%22href%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWFndGlraDNmcGh3Y3I0YnJjd2R0cTZsdXgybHk2YWZkdmR4dXA3dHJzNTJicXQzN3l3c3E%22%7D%5D%2C%22via%22%3A%5B%7B%22href%22%3A%22hl%3AuEiBEYPquNVjC7fIduIkd7za-va4KJ5_g6DlQCpBhb8G58w%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWNlbWQ1azRua3l5bHc3ZWhueXJlbzY2bnY2eHd4YXVqNDc0ZHVkc3Vha3NicXc3cW56Nm0%22%7D%5D%7D%5D%7D",
+                          "type": "application/linkset+json"
+                        }
+                      ],
+                      "replies": [
+                        {
+                          "href": "data:application/json,%7B%22%40context%22%3A%5B%22https%3A%2F%2Fwww.w3.org%2F2018%2Fcredentials%2Fv1%22%2C%22https%3A%2F%2Fw3id.org%2Fsecurity%2Fsuites%2Fed25519-2020%2Fv1%22%5D%2C%22credentialSubject%22%3A%22hl%3AuEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA%22%2C%22id%22%3A%22https%3A%2F%2Forb.domain2.com%2Fvc%2F36c995be-99bb-4d0b-9a47-7027aee67bfe%22%2C%22issuanceDate%22%3A%222022-03-17T19%3A50%3A48.7559537Z%22%2C%22issuer%22%3A%22https%3A%2F%2Forb.domain2.com%22%2C%22proof%22%3A%5B%7B%22created%22%3A%222022-03-17T19%3A50%3A48.7567186Z%22%2C%22domain%22%3A%22https%3A%2F%2Forb.domain2.com%22%2C%22proofPurpose%22%3A%22assertionMethod%22%2C%22proofValue%22%3A%22_nOavU_Te7QCyj6GIxGtnER-SWvawrUygcqt-3HyV_3P_LahVxxZmuNtOdPtrRTI4aZJUM6NmUMq_7gxX5ZFDw%22%2C%22type%22%3A%22Ed25519Signature2020%22%2C%22verificationMethod%22%3A%22did%3Aweb%3Aorb.domain2.com%23orb2key%22%7D%2C%7B%22created%22%3A%222022-03-17T19%3A50%3A49.245Z%22%2C%22domain%22%3A%22http%3A%2F%2Forb.vct%3A8077%2Fmaple2020%22%2C%22proofPurpose%22%3A%22assertionMethod%22%2C%22proofValue%22%3A%22bzvRXEWAcskOjz6WgUDDos3e9SiS2DfwmRAwHeuO3rBc0vmbSF6DiVyqeNUc_cSQ8OBYasSiTnWZaJmaEHRVBw%22%2C%22type%22%3A%22Ed25519Signature2020%22%2C%22verificationMethod%22%3A%22did%3Aweb%3Aorb.domain1.com%23orb1key2%22%7D%5D%2C%22type%22%3A%22VerifiableCredential%22%7D",
+                          "type": "application/ld+json"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "type": "AnchorEvent",
+                "url": "hl:uEiA-eY77-FHYKR5EyMZc3JIwJIowz3dl91oY-14Wxi3STg:uoQ-BeEJpcGZzOi8vYmFma3JlaWI2cGdocHg2Y3IzYXVyNHJnaXl6b256ZXJxZXNmZGJ0M3hteDN2dWdoM2x5bG1tbG9zank"                
               }
             </pre>
 
@@ -227,135 +172,40 @@
             <h4>Witnessed Event</h4>
 
             <p>
-              A witnessed operation batch is represented as an attached <i>VerifiableCredential</i>.
+              A witnessed operation batch is represented as a <i>VerifiableCredential</i>.
               The <i>credentialSubject</i> contains the hash of the witnessed object.
+              The Verifiable Credential is referenced in the <i>AnchorEvent</i> <i>replies</i> property.
             </p>
 
             <pre class="example highlight" title="Witness attachment">
               {
-                "contentObject": {
-                  "@context": [
-                    "https://www.w3.org/2018/credentials/v1",
-                    "https://w3id.org/security/suites/jws-2020/v1"
-                  ],
-                  "credentialSubject": "hl:uEiCF5Mr8n7NPsAGenkNIoY0tJtnqDUWMk_XdYpgOm5yNnA",
-                  "id": "https://example2.domain1.com/vc/1da2c6c8-6ef4-4860-be92-45cc88c3614b",
-                  "issuanceDate": "2021-10-29T18:06:34.556862797Z",
-                  "issuer": "https://example2.domain1.com",
-                  "proof": [
-                    {
-                      "created": "2021-10-29T18:06:34.566Z",
-                      "domain": "http://example.domain1.com",
-                      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..XRafN3mZOI-NuEtYWVSxNLCRd-tMg3nOgyHW4ke8P8YoGhu2O5h8t7yMj2lRcpElA1oE7zn_u3_nM6W1TvsXCA",
-                      "proofPurpose": "assertionMethod",
-                      "type": "Ed25519Signature2018",
-                      "verificationMethod": "did:web:example.domain1.com#example"
-                    },
-                    {
-                      "created": "2021-10-29T18:06:34.723037523Z",
-                      "domain": "https://example.domain2.com",
-                      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Hz-J6lY5Ombe-pj6qv5SVhou_O-zqsBkmtoYEs76wyrZef4YoBm9B0jfYn1o0Iu1cm1g4ent_5xq7SMp5LlUAQ",
-                      "proofPurpose": "assertionMethod",
-                      "type": "Ed25519Signature2018",
-                      "verificationMethod": "did:web:example.domain2.com#example2key"
-                    }
-                  ],
-                  "type": "VerifiableCredential"
-                },
-                "generator": "https://example.com/spec#v1",
-                "type": "AnchorObject",
-                "url": "hl:uEiAdjYmJQEhKreYkikrMUfyFPVyEKLmfoHWmKhebWyNpUw"
-              }
-            </pre>
-
-            The anchor is embedded within an Activity during propagation flows.
-            The Activity includes information about the CAS.
-
-            <pre class="example highlight" title="Anchor as an AnchorCredential wrapped in a Create Activity">
-              {
                 "@context": [
-                  "https://www.w3.org/ns/activitystreams",
-                  "https://w3id.org/activityanchors/v1"
+                  "https://www.w3.org/2018/credentials/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1"
                 ],
-                "actor": "https://example.domain1.com/services/example",
-                "id": "https://example.domain1.com/services/example/activities/5310cde8-ce3b-4c67-b83b-5e1ab7afa7b4",
-                "object": {
-                  "@context": "https://w3id.org/activityanchors/v1",
-                  "attachment": [
-                    {
-                      "contentObject": {
-                        "properties": {
-                          "https://w3id.org/activityanchors#generator": "https://example.com/spec#v1",
-                          "https://w3id.org/activityanchors#resources": [
-                            {
-                              "id": "did:example:uEiA7nHXweEsQJ38osrh4sIDC6qWtFBi59KH9mPVieqhZ2A:EiAg41m285JcxHNd2lBuQwtxFPHuZbupNFLTj-XaRKPXzQ",
-                              "previousAnchor": "hl:uEiA7nHXweEsQJ38osrh4sIDC6qWtFBi59KH9mPVieqhZ2A"
-                            }
-                          ]
-                        },
-                        "subject": "hl:uEiBk_3IacFfHbtWWeGoTiWNgGmSu-alJK8ygi55flvC-6g:uoQ-CeEtodHRwczovL29yYi5kb21haW4xLmNvbS9jYXMvdUVpQmtfM0lhY0ZmSGJ0V1dlR29UaVdOZ0dtU3UtYWxKSzh5Z2k1NWZsdkMtNmd4QmlwZnM6Ly9iYWZrcmVpZGU3NXpidTRjeHk1eG5sZnR5bmlqeXN5M2FkanNrNTZuampldjR6aWVsdHpwem40ZjY1aQ"
-                      },
-                      "generator": "https://example.com/spec#v1",
-                      "tag": [
-                        {
-                          "href": "hl:uEiCQP9wIPE0EmK9bJzCNtGb_8uOO-fdQfslau1aXP4DL_Q",
-                          "rel": [
-                            "witness"
-                          ],
-                          "type": "Link"
-                        }
-                      ],
-                      "type": "AnchorObject",
-                      "url": "hl:uEiCpDgdsT7zHRambMrQAX8iKiyBnlNryJoXoFRw6XUpsjQ"
-                    },
-                    {
-                      "contentObject": {
-                        "@context": [
-                          "https://www.w3.org/2018/credentials/v1",
-                          "https://w3id.org/security/suites/jws-2020/v1"
-                        ],
-                        "credentialSubject": "hl:uEiCpDgdsT7zHRambMrQAX8iKiyBnlNryJoXoFRw6XUpsjQ",
-                        "id": "https://example2.domain1.com/vc/2e8bde2b-28d3-4bae-bb53-7b0829b2e4bc",
-                        "issuanceDate": "2021-11-12T19:35:18.0020806Z",
-                        "issuer": "https://example2.domain1.com",
-                        "proof": [
-                          {
-                            "created": "2021-11-12T19:35:18.009Z",
-                            "domain": "http://example.vct:8077/maple2020",
-                            "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..f1_1LbWyMPEP06F3B3fERyflDrQK4QGWmLvaSOlgYIoITytEcARDiE4htVwmJz1iXDWZGNwl1ic9SVyDxw6UAg",
-                            "proofPurpose": "assertionMethod",
-                            "type": "Ed25519Signature2018",
-                            "verificationMethod": "did:web:example.domain1.com#example1key"
-                          },
-                          {
-                            "created": "2021-11-12T19:35:18.1946195Z",
-                            "domain": "https://example.domain2.com",
-                            "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..iIYVqDs8qdaHomub8J_X7yGLcdyrGuq2LGpz6z2dZYOI4mfTViDzYIi6vt4e5p-SeMgChqyhMZeGTKNOuYOXCg",
-                            "proofPurpose": "assertionMethod",
-                            "type": "Ed25519Signature2018",
-                            "verificationMethod": "did:web:example.domain2.com#example2key"
-                          }
-                        ],
-                        "type": "VerifiableCredential"
-                      },
-                      "generator": "https://example.com/spec#v1",
-                      "type": "AnchorObject",
-                      "url": "hl:uEiCQP9wIPE0EmK9bJzCNtGb_8uOO-fdQfslau1aXP4DL_Q"
-                    }
-                  ],
-                  "attributedTo": "https://example.domain1.com/services/example",
-                  "index": "hl:uEiCpDgdsT7zHRambMrQAX8iKiyBnlNryJoXoFRw6XUpsjQ",
-                  "parent": "hl:uEiA7nHXweEsQJ38osrh4sIDC6qWtFBi59KH9mPVieqhZ2A:uoQ-CeEtodHRwczovL29yYi5kb21haW4xLmNvbS9jYXMvdUVpQTduSFh3ZUVzUUozOG9zcmg0c0lEQzZxV3RGQmk1OUtIOW1QVmllcWhaMkF4QmlwZnM6Ly9iYWZrcmVpYjN0cjI3YTZjbGNhdHg2a2ZzeGI0bGJhZ2M1a3MyMmZheXhoMmtkN215NnZyaHZrY3ozYQ",
-                  "published": "2021-11-12T19:35:18.0017151Z",
-                  "type": "AnchorEvent",
-                  "url": "hl:uEiB14RklxzqmoiOpQ7KAoQQukw4rIjXhycqZbeqNBq8ecg:uoQ-CeEtodHRwczovL29yYi5kb21haW4xLmNvbS9jYXMvdUVpQjE0UmtseHpxbW9pT3BRN0tBb1FRdWt3NHJJalhoeWNxWmJlcU5CcThlY2d4QmlwZnM6Ly9iYWZrcmVpZHY0ZW1zbHJ6MnUycmNoa2tkd2tha2NiYm9zbWhjd2lydjRoZTR2Z2xuNWtncW5seTZvaQ"
-                },
-                "published": "2021-11-12T19:35:18.5675526Z",
-                "to": [
-                  "https://example.domain1.com/services/example/followers",
-                  "https://www.w3.org/ns/activitystreams#Public"
+                "credentialSubject": "hl:uEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA",
+                "id": "https://orb.domain2.com/vc/36c995be-99bb-4d0b-9a47-7027aee67bfe",
+                "issuanceDate": "2022-03-17T19:50:48.7559537Z",
+                "issuer": "https://orb.domain2.com",
+                "proof": [
+                  {
+                    "created": "2022-03-17T19:50:48.7567186Z",
+                    "domain": "https://orb.domain2.com",
+                    "proofPurpose": "assertionMethod",
+                    "proofValue": "_nOavU_Te7QCyj6GIxGtnER-SWvawrUygcqt-3HyV_3P_LahVxxZmuNtOdPtrRTI4aZJUM6NmUMq_7gxX5ZFDw",
+                    "type": "Ed25519Signature2020",
+                    "verificationMethod": "did:web:orb.domain2.com#orb2key"
+                  },
+                  {
+                    "created": "2022-03-17T19:50:49.245Z",
+                    "domain": "http://orb.vct:8077/maple2020",
+                    "proofPurpose": "assertionMethod",
+                    "proofValue": "bzvRXEWAcskOjz6WgUDDos3e9SiS2DfwmRAwHeuO3rBc0vmbSF6DiVyqeNUc_cSQ8OBYasSiTnWZaJmaEHRVBw",
+                    "type": "Ed25519Signature2020",
+                    "verificationMethod": "did:web:orb.domain1.com#orb1key2"
+                  }
                 ],
-                "type": "Create"
+                "type": "VerifiableCredential"
               }
             </pre>
 
@@ -475,27 +325,47 @@
               Accept-Encoding: gzip, deflate
 
               {
-                "@context": [
-                  "https://www.w3.org/ns/activitystreams",
-                  "https://w3id.org/activityanchors/v1"
-                ],
-                "id": "https://sally.example.com/services/anchor/activities/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
-                "type": "Create",
-                "actor": "https://sally.example.com/services/anchor",
+                "@context": "https://www.w3.org/ns/activitystreams",
+                "actor": "https://orb.domain2.com/services/orb",
+                "id": "https://orb.domain2.com/services/orb/activities/33762e97-3826-4b24-86ac-91356ca75299",
+                "object": {
+                  "@context": "https://w3id.org/activityanchors/v1",
+                  "object": {
+                    "linkset": [
+                      {
+                        "anchor": "hl:uEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA",
+                        "author": "https://orb.domain2.com/services/orb",
+                        "original": [
+                          {
+                            "href": "data:application/json,%7B%22linkset%22%3A%5B%7B%22anchor%22%3A%22hl%3AuEiBEYPquNVjC7fIduIkd7za-va4KJ5_g6DlQCpBhb8G58w%22%2C%22author%22%3A%22https%3A%2F%2Forb.domain2.com%2Fservices%2Forb%22%2C%22item%22%3A%5B%7B%22href%22%3A%22did%3Aorb%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%3AEiBlWWTU5i71R2uOAq04RZlNC148RN44gRAzSU9t4_hVGg%22%2C%22previous%22%3A%22hl%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiAPvYn4qoOwAQLjtBqur563OgicWQaH4lB1RMh9oEER0Q%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiCQGgEaHyhghhRIsT4hav8GMwRl-EuyGP_DMULTNTfZUg%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiA4SRtKtlBGm-VS78mtZEiAOBysN_ra8zv66Gnw_uJw4A%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%5D%2C%22profile%22%3A%22https%3A%2F%2Fw3id.org%2Forb%23v0%22%7D%5D%7D",
+                            "type": "application/linkset+json"
+                          }
+                        ],
+                        "profile": "https://w3id.org/orb#v0",
+                        "related": [
+                          {
+                            "href": "data:application/json,%7B%22linkset%22%3A%5B%7B%22anchor%22%3A%22hl%3AuEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA%22%2C%22profile%22%3A%22https%3A%2F%2Fw3id.org%2Forb%23v0%22%2C%22up%22%3A%5B%7B%22href%22%3A%22hl%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWRwd3FwY3AyMnlsbWV3engzb3ZvaGVtcHVvYjc0cHFvYjZlNGVzbDNoY3F2eGZqdzVvb2E%22%7D%2C%7B%22href%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWFndGlraDNmcGh3Y3I0YnJjd2R0cTZsdXgybHk2YWZkdmR4dXA3dHJzNTJicXQzN3l3c3E%22%7D%5D%2C%22via%22%3A%5B%7B%22href%22%3A%22hl%3AuEiBEYPquNVjC7fIduIkd7za-va4KJ5_g6DlQCpBhb8G58w%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWNlbWQ1azRua3l5bHc3ZWhueXJlbzY2bnY2eHd4YXVqNDc0ZHVkc3Vha3NicXc3cW56Nm0%22%7D%5D%7D%5D%7D",
+                            "type": "application/linkset+json"
+                          }
+                        ],
+                        "replies": [
+                          {
+                            "href": "data:application/json,%7B%22%40context%22%3A%5B%22https%3A%2F%2Fwww.w3.org%2F2018%2Fcredentials%2Fv1%22%2C%22https%3A%2F%2Fw3id.org%2Fsecurity%2Fsuites%2Fed25519-2020%2Fv1%22%5D%2C%22credentialSubject%22%3A%22hl%3AuEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA%22%2C%22id%22%3A%22https%3A%2F%2Forb.domain2.com%2Fvc%2F36c995be-99bb-4d0b-9a47-7027aee67bfe%22%2C%22issuanceDate%22%3A%222022-03-17T19%3A50%3A48.7559537Z%22%2C%22issuer%22%3A%22https%3A%2F%2Forb.domain2.com%22%2C%22proof%22%3A%5B%7B%22created%22%3A%222022-03-17T19%3A50%3A48.7567186Z%22%2C%22domain%22%3A%22https%3A%2F%2Forb.domain2.com%22%2C%22proofPurpose%22%3A%22assertionMethod%22%2C%22proofValue%22%3A%22_nOavU_Te7QCyj6GIxGtnER-SWvawrUygcqt-3HyV_3P_LahVxxZmuNtOdPtrRTI4aZJUM6NmUMq_7gxX5ZFDw%22%2C%22type%22%3A%22Ed25519Signature2020%22%2C%22verificationMethod%22%3A%22did%3Aweb%3Aorb.domain2.com%23orb2key%22%7D%2C%7B%22created%22%3A%222022-03-17T19%3A50%3A49.245Z%22%2C%22domain%22%3A%22http%3A%2F%2Forb.vct%3A8077%2Fmaple2020%22%2C%22proofPurpose%22%3A%22assertionMethod%22%2C%22proofValue%22%3A%22bzvRXEWAcskOjz6WgUDDos3e9SiS2DfwmRAwHeuO3rBc0vmbSF6DiVyqeNUc_cSQ8OBYasSiTnWZaJmaEHRVBw%22%2C%22type%22%3A%22Ed25519Signature2020%22%2C%22verificationMethod%22%3A%22did%3Aweb%3Aorb.domain1.com%23orb1key2%22%7D%5D%2C%22type%22%3A%22VerifiableCredential%22%7D",
+                            "type": "application/ld+json"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "type": "AnchorEvent",
+                  "url": "hl:uEiA-eY77-FHYKR5EyMZc3JIwJIowz3dl91oY-14Wxi3STg:uoQ-BeEJpcGZzOi8vYmFma3JlaWI2cGdocHg2Y3IzYXVyNHJnaXl6b256ZXJxZXNmZGJ0M3hteDN2dWdoM2x5bG1tbG9zank"
+                },
+                "published": "2022-03-17T19:50:51.0429926Z",
                 "to": [
-                  "https://sally.example.com/services/anchor/followers",
+                  "https://orb.domain2.com/services/orb/followers",
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
-                "published": "2021-01-27T09:30:10Z",
-                "object": {
-                  "type": "AnchorEvent",
-                  "attributedTo": "https://example.domain1.com/services/example",
-                  "index": "hl:uEiCF5Mr8n7NPsAGenkNIoY0tJtnqDUWMk_XdYpgOm5yNnA",
-                  "parent": "hl:uEiAL-T2TdNkqL5gRIX8BZvrXESPOzoIYy98YUBxc5xAG0w:uoQ-BeEJpcGZzOi8vYmFma3JlaWFsN2U2emc1Z3pmaXh6cWVqYnA0YXduNnd4Y2VyNDV0dWNkZGY1NmdjcWRyb29vZWFnMm0",
-                  "published": "2021-10-29T18:06:34.554883376Z",
-                  "url": "hl:uEiAyUitoMn-ujmlFC6DBW2AlWabxGfVpGw0b3ymcqwzSHQ:uoQ-BeEJpcGZzOi8vYmFma3JlaWJza2l2d3FtdDd2Mmhnc3JpbHVkYXZ3eWJmbGd0cGNncHZuZW5xMmc2N2Znb2t3ZGdzZHU",
-                  "attachment": [...]  
-                }
+                "type": "Create"
               }
             </pre>
 
@@ -518,28 +388,26 @@
               Accept-Encoding: gzip, deflate
 
               {
-                "@context": [
-                  "https://www.w3.org/ns/activitystreams",
-                  "https://w3id.org/activityanchors/v1"
-                ],
-                "id": "https://sally.example.com/services/anchor/activities/bafkreiatkubvbkdidscmqynkyls3iqawdqvthi7e6mbky2amuw3inxsi3y",
-                "type": "Announce",
-                "actor": "https://sally.example.com/services/anchor",
-                "to": [
-                  "https://sally.example.com/services/anchor/followers",
-                  "https://www.w3.org/ns/activitystreams#Public"
-                ],
-                "published": "2021-01-27T09:30:10Z",
+                "@context": "https://www.w3.org/ns/activitystreams",
+                "actor": "https://orb.domain1.com/services/orb",
+                "id": "https://orb.domain1.com/services/orb/activities/f6679be1-6f36-44a4-aae3-b865c73db8ef",
                 "object": {
-                  "type": "Collection",
-                  "totalItems": 1,
                   "items": [
                     {
+                      "@context": "https://w3id.org/activityanchors/v1",
                       "type": "AnchorEvent",
-                      "url": "hl:uEiAyUitoMn-ujmlFC6DBW2AlWabxGfVpGw0b3ymcqwzSHQ:uoQ-BeEJpcGZzOi8vYmFma3JlaWJza2l2d3FtdDd2Mmhnc3JpbHVkYXZ3eWJmbGd0cGNncHZuZW5xMmc2N2Znb2t3ZGdzZHU",
+                      "url": "hl:uEiA-eY77-FHYKR5EyMZc3JIwJIowz3dl91oY-14Wxi3STg:uoQ-BeEJpcGZzOi8vYmFma3JlaWI2cGdocHg2Y3IzYXVyNHJnaXl6b256ZXJxZXNmZGJ0M3hteDN2dWdoM2x5bG1tbG9zank"
                     }
-                  ]
-                }
+                  ],
+                  "totalItems": 1,
+                  "type": "Collection"
+                },
+                "published": "2022-03-17T19:50:52.0966142Z",
+                "to": [
+                  "https://orb.domain1.com/services/orb/followers",
+                  "https://www.w3.org/ns/activitystreams#Public"
+                ],
+                "type": "Announce"
               }
             </pre>
 
@@ -555,88 +423,49 @@
 
               {
                 "@context": "https://www.w3.org/ns/activitystreams",
-                "actor": "https://example.domain2.com/services/example",
-                "id": "https://example.domain2.com/services/example/activities/be75048c-6463-4d59-ba7c-b376f331ee14",
+                "actor": "https://orb.domain1.com/services/orb",
+                "id": "https://orb.domain1.com/services/orb/activities/f6679be1-6f36-44a4-aae3-b865c73db8ef",
                 "object": {
                   "items": [
                     {
                       "@context": "https://w3id.org/activityanchors/v1",
-                      "attachment": [
-                        {
-                          "contentObject": {
-                            "properties": {
-                              "https://w3id.org/activityanchors#generator": "https://example.com/spec#v1",
-                              "https://w3id.org/activityanchors#resources": [
-                                {
-                                  "id": "did:example:uEiA7nHXweEsQJ38osrh4sIDC6qWtFBi59KH9mPVieqhZ2A:EiAg41m285JcxHNd2lBuQwtxFPHuZbupNFLTj-XaRKPXzQ",
-                                  "previousAnchor": "hl:uEiA7nHXweEsQJ38osrh4sIDC6qWtFBi59KH9mPVieqhZ2A"
-                                }
-                              ]
-                            },
-                            "subject": "hl:uEiBk_3IacFfHbtWWeGoTiWNgGmSu-alJK8ygi55flvC-6g:uoQ-CeEtodHRwczovL29yYi5kb21haW4xLmNvbS9jYXMvdUVpQmtfM0lhY0ZmSGJ0V1dlR29UaVdOZ0dtU3UtYWxKSzh5Z2k1NWZsdkMtNmd4QmlwZnM6Ly9iYWZrcmVpZGU3NXpidTRjeHk1eG5sZnR5bmlqeXN5M2FkanNrNTZuampldjR6aWVsdHpwem40ZjY1aQ"
-                          },
-                          "generator": "https://example.com/spec#v1",
-                          "tag": [
-                            {
-                              "href": "hl:uEiCQP9wIPE0EmK9bJzCNtGb_8uOO-fdQfslau1aXP4DL_Q",
-                              "rel": [
-                                "witness"
-                              ],
-                              "type": "Link"
-                            }
-                          ],
-                          "type": "AnchorObject",
-                          "url": "hl:uEiCpDgdsT7zHRambMrQAX8iKiyBnlNryJoXoFRw6XUpsjQ"
-                        },
-                        {
-                          "contentObject": {
-                            "@context": [
-                              "https://www.w3.org/2018/credentials/v1",
-                              "https://w3id.org/security/suites/jws-2020/v1"
-                            ],
-                            "credentialSubject": "hl:uEiCpDgdsT7zHRambMrQAX8iKiyBnlNryJoXoFRw6XUpsjQ",
-                            "id": "https://example2.domain1.com/vc/2e8bde2b-28d3-4bae-bb53-7b0829b2e4bc",
-                            "issuanceDate": "2021-11-12T19:35:18.0020806Z",
-                            "issuer": "https://example2.domain1.com",
-                            "proof": [
+                      "object": {
+                        "linkset": [
+                          {
+                            "anchor": "hl:uEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA",
+                            "author": "https://orb.domain2.com/services/orb",
+                            "original": [
                               {
-                                "created": "2021-11-12T19:35:18.009Z",
-                                "domain": "http://example.vct:8077/maple2020",
-                                "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..f1_1LbWyMPEP06F3B3fERyflDrQK4QGWmLvaSOlgYIoITytEcARDiE4htVwmJz1iXDWZGNwl1ic9SVyDxw6UAg",
-                                "proofPurpose": "assertionMethod",
-                                "type": "Ed25519Signature2018",
-                                "verificationMethod": "did:web:example.domain1.com#example1key"
-                              },
-                              {
-                                "created": "2021-11-12T19:35:18.1946195Z",
-                                "domain": "https://example.domain2.com",
-                                "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..iIYVqDs8qdaHomub8J_X7yGLcdyrGuq2LGpz6z2dZYOI4mfTViDzYIi6vt4e5p-SeMgChqyhMZeGTKNOuYOXCg",
-                                "proofPurpose": "assertionMethod",
-                                "type": "Ed25519Signature2018",
-                                "verificationMethod": "did:web:example.domain2.com#example2key"
+                                "href": "data:application/json,%7B%22linkset%22%3A%5B%7B%22anchor%22%3A%22hl%3AuEiBEYPquNVjC7fIduIkd7za-va4KJ5_g6DlQCpBhb8G58w%22%2C%22author%22%3A%22https%3A%2F%2Forb.domain2.com%2Fservices%2Forb%22%2C%22item%22%3A%5B%7B%22href%22%3A%22did%3Aorb%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%3AEiBlWWTU5i71R2uOAq04RZlNC148RN44gRAzSU9t4_hVGg%22%2C%22previous%22%3A%22hl%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiAPvYn4qoOwAQLjtBqur563OgicWQaH4lB1RMh9oEER0Q%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiCQGgEaHyhghhRIsT4hav8GMwRl-EuyGP_DMULTNTfZUg%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AEiA4SRtKtlBGm-VS78mtZEiAOBysN_ra8zv66Gnw_uJw4A%22%2C%22previous%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%22%7D%5D%2C%22profile%22%3A%22https%3A%2F%2Fw3id.org%2Forb%23v0%22%7D%5D%7D",
+                                "type": "application/linkset+json"
                               }
                             ],
-                            "type": "VerifiableCredential"
-                          },
-                          "generator": "https://example.com/spec#v1",
-                          "type": "AnchorObject",
-                          "url": "hl:uEiCQP9wIPE0EmK9bJzCNtGb_8uOO-fdQfslau1aXP4DL_Q"
-                        }
-                      ],
-                      "attributedTo": "https://example.domain1.com/services/example",
-                      "index": "hl:uEiCpDgdsT7zHRambMrQAX8iKiyBnlNryJoXoFRw6XUpsjQ",
-                      "parent": "hl:uEiA7nHXweEsQJ38osrh4sIDC6qWtFBi59KH9mPVieqhZ2A:uoQ-CeEtodHRwczovL29yYi5kb21haW4xLmNvbS9jYXMvdUVpQTduSFh3ZUVzUUozOG9zcmg0c0lEQzZxV3RGQmk1OUtIOW1QVmllcWhaMkF4QmlwZnM6Ly9iYWZrcmVpYjN0cjI3YTZjbGNhdHg2a2ZzeGI0bGJhZ2M1a3MyMmZheXhoMmtkN215NnZyaHZrY3ozYQ",
-                      "published": "2021-11-12T19:35:18.0017151Z",
+                            "profile": "https://w3id.org/orb#v0",
+                            "related": [
+                              {
+                                "href": "data:application/json,%7B%22linkset%22%3A%5B%7B%22anchor%22%3A%22hl%3AuEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA%22%2C%22profile%22%3A%22https%3A%2F%2Fw3id.org%2Forb%23v0%22%2C%22up%22%3A%5B%7B%22href%22%3A%22hl%3AuEiBvtB4n61hbCWzfbquORj6OD_j4OD4nCSXs4oVuVNuucA%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWRwd3FwY3AyMnlsbWV3engzb3ZvaGVtcHVvYjc0cHFvYjZlNGVzbDNoY3F2eGZqdzVvb2E%22%7D%2C%7B%22href%22%3A%22hl%3AuEiAGmhR9leewo8DEVhzh5dL6XjwCjqO9H_nGXdBhPf8WlA%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWFndGlraDNmcGh3Y3I0YnJjd2R0cTZsdXgybHk2YWZkdmR4dXA3dHJzNTJicXQzN3l3c3E%22%7D%5D%2C%22via%22%3A%5B%7B%22href%22%3A%22hl%3AuEiBEYPquNVjC7fIduIkd7za-va4KJ5_g6DlQCpBhb8G58w%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWNlbWQ1azRua3l5bHc3ZWhueXJlbzY2bnY2eHd4YXVqNDc0ZHVkc3Vha3NicXc3cW56Nm0%22%7D%5D%7D%5D%7D",
+                                "type": "application/linkset+json"
+                              }
+                            ],
+                            "replies": [
+                              {
+                                "href": "data:application/json,%7B%22%40context%22%3A%5B%22https%3A%2F%2Fwww.w3.org%2F2018%2Fcredentials%2Fv1%22%2C%22https%3A%2F%2Fw3id.org%2Fsecurity%2Fsuites%2Fed25519-2020%2Fv1%22%5D%2C%22credentialSubject%22%3A%22hl%3AuEiB9Chtelm2NlC00j8_I0Febv5Lre3Qsp-ElzpYPeO2HhA%22%2C%22id%22%3A%22https%3A%2F%2Forb.domain2.com%2Fvc%2F36c995be-99bb-4d0b-9a47-7027aee67bfe%22%2C%22issuanceDate%22%3A%222022-03-17T19%3A50%3A48.7559537Z%22%2C%22issuer%22%3A%22https%3A%2F%2Forb.domain2.com%22%2C%22proof%22%3A%5B%7B%22created%22%3A%222022-03-17T19%3A50%3A48.7567186Z%22%2C%22domain%22%3A%22https%3A%2F%2Forb.domain2.com%22%2C%22proofPurpose%22%3A%22assertionMethod%22%2C%22proofValue%22%3A%22_nOavU_Te7QCyj6GIxGtnER-SWvawrUygcqt-3HyV_3P_LahVxxZmuNtOdPtrRTI4aZJUM6NmUMq_7gxX5ZFDw%22%2C%22type%22%3A%22Ed25519Signature2020%22%2C%22verificationMethod%22%3A%22did%3Aweb%3Aorb.domain2.com%23orb2key%22%7D%2C%7B%22created%22%3A%222022-03-17T19%3A50%3A49.245Z%22%2C%22domain%22%3A%22http%3A%2F%2Forb.vct%3A8077%2Fmaple2020%22%2C%22proofPurpose%22%3A%22assertionMethod%22%2C%22proofValue%22%3A%22bzvRXEWAcskOjz6WgUDDos3e9SiS2DfwmRAwHeuO3rBc0vmbSF6DiVyqeNUc_cSQ8OBYasSiTnWZaJmaEHRVBw%22%2C%22type%22%3A%22Ed25519Signature2020%22%2C%22verificationMethod%22%3A%22did%3Aweb%3Aorb.domain1.com%23orb1key2%22%7D%5D%2C%22type%22%3A%22VerifiableCredential%22%7D",
+                                "type": "application/ld+json"
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "type": "AnchorEvent",
-                      "url": "hl:uEiB14RklxzqmoiOpQ7KAoQQukw4rIjXhycqZbeqNBq8ecg:uoQ-CeEtodHRwczovL29yYi5kb21haW4xLmNvbS9jYXMvdUVpQjE0UmtseHpxbW9pT3BRN0tBb1FRdWt3NHJJalhoeWNxWmJlcU5CcThlY2d4QmlwZnM6Ly9iYWZrcmVpZHY0ZW1zbHJ6MnUycmNoa2tkd2tha2NiYm9zbWhjd2lydjRoZTR2Z2xuNWtncW5seTZvaQ"
+                      "url": "hl:uEiA-eY77-FHYKR5EyMZc3JIwJIowz3dl91oY-14Wxi3STg:uoQ-BeEJpcGZzOi8vYmFma3JlaWI2cGdocHg2Y3IzYXVyNHJnaXl6b256ZXJxZXNmZGJ0M3hteDN2dWdoM2x5bG1tbG9zank"
                     }
                   ],
                   "totalItems": 1,
                   "type": "Collection"
                 },
-                "published": "2021-11-12T19:35:18.7688724Z",
+                "published": "2022-03-17T19:50:52.0966142Z",
                 "to": [
-                  "https://example.domain2.com/services/example/followers",
+                  "https://orb.domain1.com/services/orb/followers",
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
                 "type": "Announce"
@@ -1041,21 +870,40 @@
 
               {
                 "@context": "https://www.w3.org/ns/activitystreams",
-                "actor": "https://example.domain1.com/services/example",
-                "endTime": "2021-11-12T19:45:50.7676356Z",
-                "id": "https://example.domain1.com/services/example/activities/db7e80d5-94a7-41b4-b951-2219e6800023",
+                "actor": "https://orb.domain2.com/services/orb",
+                "endTime": "2022-03-17T20:01:40.3993939Z",
+                "id": "https://orb.domain2.com/services/orb/activities/575e71af-908d-4624-9c0e-f3ccb499a834",
                 "object": {
-                  "@context": "https://w3id.org/activityanchors/v1",
-                  "attachment": [...],
-                  "attributedTo": "https://example.domain1.com/services/example",
-                  "index": "hl:uEiBz8xiBcw5uw5dJHiXE_Sj-6kqB1pW55OlnW3J5_S58Iw",
-                  "published": "2021-11-12T19:35:50.6898963Z",
-                  "type": "AnchorEvent"
+                  "linkset": [
+                    {
+                      "anchor": "hl:uEiDfqRoVGvXNZFsk_bn3YXl5Fkvm3PTz0x74F_jiJyhmRg",
+                      "author": "https://orb.domain2.com/services/orb",
+                      "original": [
+                        {
+                          "href": "data:application/json,%7B%22linkset%22%3A%5B%7B%22anchor%22%3A%22hl%3AuEiDs8R1BpGCi2fyhGoqUp63MWQ-xTDBDHEsKBl_Z1JDdLA%22%2C%22author%22%3A%22https%3A%2F%2Forb.domain2.com%2Fservices%2Forb%22%2C%22item%22%3A%5B%7B%22href%22%3A%22did%3Aorb%3AuEiDVhc3Qc0pRNBWXu_WxKTrlgDkf7IENAeRY-8g5NQpD9g%3AEiAEEAHzgqgAZnsStD_M-CUAeMOoyKu-6sCFQeUuIJ2Z-A%22%2C%22previous%22%3A%22hl%3AuEiDVhc3Qc0pRNBWXu_WxKTrlgDkf7IENAeRY-8g5NQpD9g%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiDVhc3Qc0pRNBWXu_WxKTrlgDkf7IENAeRY-8g5NQpD9g%3AEiAOgbNe-wswfrOr8M27BTmNN9gyXuD1oX7DAgUkbg34hw%22%2C%22previous%22%3A%22hl%3AuEiDVhc3Qc0pRNBWXu_WxKTrlgDkf7IENAeRY-8g5NQpD9g%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiBp-sz4eQW13Ph8s00_RwoBVVGANtgAxlWHxx9eUKPaPw%3AEiC1O3WET-i2kokYfXU-5pRhmR48S2mK-AfbaP0pzOuHGQ%22%2C%22previous%22%3A%22hl%3AuEiBp-sz4eQW13Ph8s00_RwoBVVGANtgAxlWHxx9eUKPaPw%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiCRVwZ72b_Y4LrItUo_K7yBkORUphc4H5YEnM9CiI1-ew%3AEiBZeAuEMDD-Nq1VZoD3UviF6q3nk0cDkT8twzyPs38FAA%22%2C%22previous%22%3A%22hl%3AuEiCRVwZ72b_Y4LrItUo_K7yBkORUphc4H5YEnM9CiI1-ew%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiAs8Y9cJFhzhoxgvJbvrOuD0vhBoOvtEHZYNWkGxxwQBA%3AEiD4tf0lLUtFDiTVhltCcV_IHQDGXreeNj1JX0yd8j5UNQ%22%2C%22previous%22%3A%22hl%3AuEiAs8Y9cJFhzhoxgvJbvrOuD0vhBoOvtEHZYNWkGxxwQBA%22%7D%2C%7B%22href%22%3A%22did%3Aorb%3AuEiDVhc3Qc0pRNBWXu_WxKTrlgDkf7IENAeRY-8g5NQpD9g%3AEiAYzrOSgdO73oNIZp6U_lbdXJh4Dp1rifzwF0JWPnXZdw%22%2C%22previous%22%3A%22hl%3AuEiDVhc3Qc0pRNBWXu_WxKTrlgDkf7IENAeRY-8g5NQpD9g%22%7D%5D%2C%22profile%22%3A%22https%3A%2F%2Fw3id.org%2Forb%23v0%22%7D%5D%7D",
+                          "type": "application/linkset+json"
+                        }
+                      ],
+                      "profile": "https://w3id.org/orb#v0",
+                      "related": [
+                        {
+                          "href": "data:application/json,%7B%22linkset%22%3A%5B%7B%22anchor%22%3A%22hl%3AuEiDfqRoVGvXNZFsk_bn3YXl5Fkvm3PTz0x74F_jiJyhmRg%22%2C%22profile%22%3A%22https%3A%2F%2Fw3id.org%2Forb%23v0%22%2C%22up%22%3A%5B%7B%22href%22%3A%22hl%3AuEiDVhc3Qc0pRNBWXu_WxKTrlgDkf7IENAeRY-8g5NQpD9g%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWd2cXhnNWE0MmtrZTJibGY1MzZ3eXNzb3hmcWE0cjczZWJidWE2aXdoM3phNHRrY3NkNnk%22%7D%2C%7B%22href%22%3A%22hl%3AuEiBp-sz4eQW13Ph8s00_RwoBVVGANtgAxlWHxx9eUKPaPw%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWRqN2xncHE2aWZ3eG9wcTdmdGp1N3VvY3Fia3ZpeWFud3lhZGRmbGI2aGQ1cGZiaTYyaDQ%22%7D%2C%7B%22href%22%3A%22hl%3AuEiCRVwZ72b_Y4LrItUo_K7yBkORUphc4H5YEnM9CiI1-ew%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWVyazRkaHh3bjczZHFsdnNmdmppN3N4cGVic2RzZmpqcXhoYXB6bWJlNHo1YmlyZGw2cG0%22%7D%2C%7B%22href%22%3A%22hl%3AuEiAs8Y9cJFhzhoxgvJbvrOuD0vhBoOvtEHZYNWkGxxwQBA%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWJtNmdodnlqY3lvb2RpeXlmNHMzeDJ6MjRkMmw0ZWRpaGw1dWlobXdidm5lZG1vaGFxYXE%22%7D%5D%2C%22via%22%3A%5B%7B%22href%22%3A%22hl%3AuEiDs8R1BpGCi2fyhGoqUp63MWQ-xTDBDHEsKBl_Z1JDdLA%3AuoQ-BeEJpcGZzOi8vYmFma3JlaWhtNmVvdWRqZGF1bG03emlpMnJra2twbG9tbGVoM2N0YnFpbW9ld2NxZ2w3bTVqZWc1ZnE%22%7D%5D%7D%5D%7D",
+                          "type": "application/linkset+json"
+                        }
+                      ],
+                      "replies": [
+                        {
+                          "href": "data:application/json,%7B%22%40context%22%3A%5B%22https%3A%2F%2Fwww.w3.org%2F2018%2Fcredentials%2Fv1%22%2C%22https%3A%2F%2Fw3id.org%2Fsecurity%2Fsuites%2Fed25519-2020%2Fv1%22%5D%2C%22credentialSubject%22%3A%22hl%3AuEiDfqRoVGvXNZFsk_bn3YXl5Fkvm3PTz0x74F_jiJyhmRg%22%2C%22id%22%3A%22https%3A%2F%2Forb.domain2.com%2Fvc%2F1e1d0577-f1d7-4468-8368-d02ed06ac4ad%22%2C%22issuanceDate%22%3A%222022-03-17T19%3A51%3A40.0860918Z%22%2C%22issuer%22%3A%22https%3A%2F%2Forb.domain2.com%22%2C%22proof%22%3A%7B%22created%22%3A%222022-03-17T19%3A51%3A40.0865179Z%22%2C%22domain%22%3A%22https%3A%2F%2Forb.domain2.com%22%2C%22proofPurpose%22%3A%22assertionMethod%22%2C%22proofValue%22%3A%22HwbTeCLK9IBovC_Oyp1l3BKZFT5h9tpwWIgC1f216aYI22hLM5EsKuJq1J2dsRtFakxXtwVKG4j2_XeVy0IJCA%22%2C%22type%22%3A%22Ed25519Signature2020%22%2C%22verificationMethod%22%3A%22did%3Aweb%3Aorb.domain2.com%23orb2key%22%7D%2C%22type%22%3A%22VerifiableCredential%22%7D",
+                          "type": "application/ld+json"
+                        }
+                      ]
+                    }
+                  ]
                 },
-                "startTime": "2021-11-12T19:35:50.7676356Z",
+                "startTime": "2022-03-17T19:51:40.3993939Z",
                 "target": "https://w3id.org/activityanchors#AnchorWitness",
                 "to": [
-                  "https://example.domain2.com/services/example",
+                  "https://orb.domain1.com/services/orb",
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
                 "type": "Offer"
@@ -1081,48 +929,49 @@
 
               {
                 "@context": "https://www.w3.org/ns/activitystreams",
-                "actor": "https://example.domain2.com/services/example",
-                "id": "https://example.domain2.com/services/example/activities/fa6cb5b5-e114-4fdc-b717-2321d853cd50",
+                "actor": "https://orb.domain1.com/services/orb",
+                "id": "https://orb.domain1.com/services/orb/activities/e99568ba-23b0-45be-9d7d-3b6a5b87df26",
                 "object": {
                   "@context": "https://www.w3.org/ns/activitystreams",
-                  "actor": "https://example.domain1.com/services/example",
-                  "id": "https://example.domain1.com/services/example/activities/db7e80d5-94a7-41b4-b951-2219e6800023",
-                  "object": "hl:uEiBz8xiBcw5uw5dJHiXE_Sj-6kqB1pW55OlnW3J5_S58Iw",
+                  "actor": "https://orb.domain2.com/services/orb",
+                  "id": "https://orb.domain2.com/services/orb/activities/575e71af-908d-4624-9c0e-f3ccb499a834",
+                  "object": "hl:uEiDfqRoVGvXNZFsk_bn3YXl5Fkvm3PTz0x74F_jiJyhmRg",
                   "target": "https://w3id.org/activityanchors#AnchorWitness",
                   "to": [
-                    "https://example.domain2.com/services/example",
+                    "https://orb.domain1.com/services/orb",
                     "https://www.w3.org/ns/activitystreams#Public"
                   ],
                   "type": "Offer"
                 },
                 "result": {
+                  "@context": "https://w3id.org/activityanchors/v1",
                   "attachment": [
                     {
                       "@context": [
                         "https://w3id.org/security/v1",
-                        "https://w3id.org/security/suites/jws-2020/v1"
+                        "https://w3id.org/security/suites/ed25519-2020/v1"
                       ],
                       "proof": {
-                        "created": "2021-11-12T19:35:50.8619224Z",
-                        "domain": "https://example.domain2.com",
-                        "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..gWh0WjiWB-st6pxGTD6zdyfNyEDJqBIfIU4jj7UYR54IDoqizFvvf1GZw_-89puhvjNHjsYxAWt0rDU7lY4KDg",
+                        "created": "2022-03-17T19:51:41.199Z",
+                        "domain": "http://orb.vct:8077/maple2020",
                         "proofPurpose": "assertionMethod",
-                        "type": "Ed25519Signature2018",
-                        "verificationMethod": "did:web:example.domain2.com#example2key"
+                        "proofValue": "AJScmmux_ZakG5Bt0sZEWtZoMfV7httIiZjNTJjSBI-_-x3K5KNjzmsG9nSKJabWSaJZQHxO_UuU-ecXi3hrBg",
+                        "type": "Ed25519Signature2020",
+                        "verificationMethod": "did:web:orb.domain1.com#orb1key2"
                       }
                     }
                   ],
-                  "endTime": "2021-11-12T19:45:50.8767317Z",
-                  "inReplyTo": "hl:uEiBz8xiBcw5uw5dJHiXE_Sj-6kqB1pW55OlnW3J5_S58Iw",
-                  "startTime": "2021-11-12T19:35:50.8767317Z",
+                  "endTime": "2022-03-17T20:01:41.4943369Z",
+                  "inReplyTo": "hl:uEiDfqRoVGvXNZFsk_bn3YXl5Fkvm3PTz0x74F_jiJyhmRg",
+                  "startTime": "2022-03-17T19:51:41.4943369Z",
                   "type": "AnchorReceipt"
                 },
                 "to": [
-                  "https://example.domain1.com/services/example",
+                  "https://orb.domain2.com/services/orb",
                   "https://www.w3.org/ns/activitystreams#Public"
                 ],
                 "type": "Accept"
-              }              
+              }           
             </pre>
 
             <p>
