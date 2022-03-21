@@ -10,93 +10,11 @@
                 "@protected": true,
 
                 "id": "@id",
-                "type": "@type",
-
-                "aa": "https://w3id.org/activityanchors#",
-                "as": "https://www.w3.org/ns/activitystreams#",
-                
-                "parent": "aa:parent"
-            }
-        },
-        "AnchorIndex": {
-            "@id": "https://w3id.org/activityanchors#AnchorIndex",
-            "@context": {
-                "@version": 1.1,
-                "@protected": true,
-
-                "id": "@id",
-                "type": "@type",
-
-                "aa": "https://w3id.org/activityanchors#",
-                "as": "https://www.w3.org/ns/activitystreams#",
-                
-                "metadata": "aa:metadata"
-            }
-        },
-        "AnchorObject": {
-            "@id": "https://w3id.org/activityanchors#AnchorObject",
-            "@context": {
-                "@version": 1.1,
-                "@protected": true,
-
-                "id": "@id",
-                "type": "@type",
-
-                "aa": "https://w3id.org/activityanchors#",
-                "as": "https://www.w3.org/ns/activitystreams#",
-
-                "contentObject": {
-                    "@id": "aa:content",
-                    "@type": "@json"
-                }
-            }
-        },
-        "AnchorCredential": {
-            "@id": "https://w3id.org/activityanchors#AnchorCredential",
-            "@context": {
-                "@version": 1.1,
-                "@protected": true,
-
-                "id": "@id",
                 "type": "@type"
-            }
-        },
-        "AnchorWitness": {
-            "@id": "https://w3id.org/activityanchors#AnchorWitness",
-            "@context": {
-                "@version": 1.1,
-                "@protected": true,
-
-                "id": "@id",
-                "type": "@type"
-            }
-        },
-        "AnchorProof": {
-            "@id": "https://w3id.org/activityanchors#AnchorProof",
-            "@context": {
-                "@version": 1.1,
-                "@protected": true,
-
-                "id": "@id",
-                "type": "@type",
-
-                "sec": "https://w3id.org/security#",
-
-                "proof": {"@id": "sec:proof", "@type": "@id", "@container": "@graph"}
             }
         },
         "AnchorReceipt": {
             "@id": "https://w3id.org/activityanchors#AnchorReceipt",
-            "@context": {
-                "@version": 1.1,
-                "@protected": true,
-
-                "id": "@id",
-                "type": "@type"
-            }
-        },
-        "AnchorReference": {
-            "@id": "https://w3id.org/activityanchors#AnchorReference",
             "@context": {
                 "@version": 1.1,
                 "@protected": true,
